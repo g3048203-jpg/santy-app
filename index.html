@@ -14,7 +14,6 @@
       --text-main: #ffffff;
       --text-muted: #828c99;
       --accent-teal: #00e5ff;
-      --accent-teal-dark: #00b4d8;
       --accent-teal-glow: rgba(0, 229, 255, 0.25);
       --accent-green: #2ecc71;
       --danger: #ff4757;
@@ -22,14 +21,13 @@
       --nav-bg: #11151a;
       --radius-lg: 18px;
       --radius-md: 12px;
-      --radius-sm: 8px;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
     }
@@ -42,7 +40,8 @@
       min-height: 100vh;
     }
 
-    /* Верхняя панель */
+    ::-webkit-scrollbar { width: 0px; }
+
     .top-header {
       padding: 16px 20px 10px;
       display: flex;
@@ -103,10 +102,8 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 16px;
     }
 
-    /* Контейнер страниц */
     .view-container {
       padding: 0 16px;
       max-width: 480px;
@@ -124,7 +121,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Блоки Баланса */
     .balances-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -155,10 +151,9 @@
       color: var(--accent-teal);
     }
 
-    /* Логотип */
     .brand-hero {
       text-align: center;
-      padding: 18px 0 12px;
+      padding: 16px 0 10px;
     }
     .brand-hero-title {
       font-size: 32px;
@@ -177,7 +172,6 @@
       -webkit-text-fill-color: var(--accent-teal);
     }
 
-    /* Баннер канала */
     .promo-banner {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -225,7 +219,6 @@
       white-space: nowrap;
     }
 
-    /* Карточка подписки */
     .subscription-panel {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -250,9 +243,6 @@
       border-radius: 8px;
       font-size: 12px;
       color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 5px;
     }
     .sub-meta {
       font-size: 13px;
@@ -309,11 +299,6 @@
     .btn-setup-wide:hover {
       border-color: var(--accent-teal);
     }
-    .btn-setup-wide .left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
 
     .download-section-title {
       font-size: 12px;
@@ -362,7 +347,6 @@
       transform: scale(0.98);
     }
 
-    /* Верхний стрип в установке */
     .wizard-key-strip {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -399,10 +383,8 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 14px;
     }
 
-    /* Визард установки */
     .wizard-body {
       text-align: center;
       padding: 20px 0 30px;
@@ -467,7 +449,6 @@
       cursor: pointer;
     }
 
-    /* Платформы */
     .platform-row {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -478,10 +459,6 @@
       justify-content: space-between;
       margin-bottom: 10px;
       cursor: pointer;
-      transition: border 0.15s;
-    }
-    .platform-row:hover {
-      border-color: var(--accent-teal);
     }
     .platform-left {
       display: flex;
@@ -491,7 +468,6 @@
       font-weight: 700;
     }
 
-    /* Профиль */
     .profile-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -531,7 +507,6 @@
       color: var(--accent-teal);
       margin-top: 18px;
       margin-bottom: 10px;
-      padding-left: 2px;
     }
     .menu-row {
       display: flex;
@@ -588,11 +563,6 @@
       justify-content: space-between;
       gap: 12px;
     }
-    .email-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
     .btn-bind {
       background: rgba(0, 229, 255, 0.15);
       border: 1px solid rgba(0, 229, 255, 0.4);
@@ -602,7 +572,6 @@
       padding: 8px 14px;
       border-radius: 8px;
       cursor: pointer;
-      white-space: nowrap;
     }
 
     .theme-switcher-grid {
@@ -630,7 +599,6 @@
       background: rgba(0, 229, 255, 0.08);
     }
 
-    /* FAQ */
     .faq-chips {
       display: flex;
       gap: 8px;
@@ -682,7 +650,6 @@
       display: block;
     }
 
-    /* Нижний навбар */
     .bottom-navbar {
       position: fixed;
       bottom: 0; left: 0; right: 0;
@@ -723,11 +690,7 @@
     .nav-tab-btn.active .nav-dot {
       display: block;
     }
-    .nav-tab-icon {
-      font-size: 20px;
-    }
 
-    /* Модалки-шторки */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -771,7 +734,6 @@
       padding: 4px;
     }
 
-    /* Тарифы */
     .tariff-item-row {
       background: var(--card-inner);
       border: 1px solid var(--card-border);
@@ -814,7 +776,6 @@
       font-weight: 900;
     }
 
-    /* Устройства */
     .device-manage-row {
       background: var(--card-inner);
       border: 1px solid var(--card-border);
@@ -830,18 +791,6 @@
       align-items: center;
       gap: 12px;
     }
-    .device-manage-icon {
-      color: var(--accent-teal);
-      font-size: 18px;
-    }
-    .device-name-bold {
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .device-date-small {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
     .btn-trash-device {
       background: var(--danger-bg);
       border: 1px solid rgba(255, 71, 87, 0.25);
@@ -855,56 +804,6 @@
       cursor: pointer;
     }
 
-    /* Чат */
-    .inapp-chat-box {
-      display: flex;
-      flex-direction: column;
-      height: 60vh;
-    }
-    .chat-messages-scroll {
-      flex: 1;
-      overflow-y: auto;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .chat-bubble {
-      max-width: 80%;
-      padding: 10px 14px;
-      border-radius: 14px;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-    .chat-bubble.bot {
-      background: var(--card-inner);
-      align-self: flex-start;
-      border-bottom-left-radius: 2px;
-    }
-    .chat-bubble.user {
-      background: linear-gradient(135deg, #00b4d8, #0077b6);
-      align-self: flex-end;
-      color: #fff;
-      border-bottom-right-radius: 2px;
-    }
-    .chat-input-bar {
-      display: flex;
-      gap: 8px;
-      padding-top: 10px;
-      border-top: 1px solid var(--card-border);
-    }
-    .chat-text-input {
-      flex: 1;
-      background: var(--card-inner);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 10px 14px;
-      color: #fff;
-      font-size: 14px;
-      outline: none;
-    }
-
-    /* Конфетти */
     #confetti-canvas {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -917,16 +816,15 @@
 
   <canvas id="confetti-canvas"></canvas>
 
-  <!-- Верхняя строка приложения -->
   <header class="top-header">
     <div>
       <div class="user-greeting">Добро пожаловать</div>
-      <div class="username-title" id="display-user">wackzzy</div>
+      <div class="username-title" id="display-user">Пользователь</div>
     </div>
     <div class="header-controls">
-      <div class="status-chip">
+      <div class="status-chip" id="user-status-chip">
         <div class="status-dot"></div>
-        Активен
+        <span id="status-text">Активен</span>
       </div>
       <div class="theme-toggle-btn" onclick="toggleTheme()">☀️</div>
     </div>
@@ -934,20 +832,20 @@
 
   <div class="view-container">
 
-    <!-- ТАБ 1: ГЛАВНАЯ -->
+    <!-- TAB 1: ГЛАВНАЯ -->
     <div id="tab-home" class="tab-page active">
       <div class="balances-row">
         <div class="balance-box">
           <div>
             <div class="label">Баланс</div>
-            <div class="val">0 ₽</div>
+            <div class="val" id="val-balance">0 ₽</div>
           </div>
           <div class="icon">💳</div>
         </div>
         <div class="balance-box">
           <div>
             <div class="label">Бонусы</div>
-            <div class="val" style="color: var(--accent-teal);">0 ₽</div>
+            <div class="val" id="val-bonus" style="color: var(--accent-teal);">0 ₽</div>
           </div>
           <div class="icon">⭐</div>
         </div>
@@ -970,11 +868,11 @@
 
       <div class="subscription-panel">
         <div class="sub-head">
-          <div class="sub-date-strong">до 26 октября 2026 г.</div>
-          <div class="device-pill">10 устройств 📱</div>
+          <div class="sub-date-strong" id="sub-expire-text">Активна до 24 октября 2026 г.</div>
+          <div class="device-pill" id="device-limit-pill">10 устройств 📱</div>
         </div>
         <div class="sub-meta">
-          <span>№263828</span>
+          <span id="key-number-text">Ключ #1</span>
           <span>•</span>
           <span class="highlight">online • ∞</span>
         </div>
@@ -983,17 +881,17 @@
           <button class="btn-action-white" onclick="openModal('tariffsDrawer')">
             💳 Пополнить
           </button>
-          <button class="btn-action-white" onclick="openModal('tariffsDrawer')">
+          <button class="btn-action-white" onclick="generateNewKey()">
             🔑 Новый ключ
           </button>
         </div>
 
         <div class="btn-setup-wide" onclick="switchTab('install')">
-          <div class="left">
+          <div style="display:flex; align-items:center; gap:10px;">
             <span style="font-size: 18px; color: var(--accent-teal);">🔌</span>
             <span>Установка и настройка</span>
           </div>
-          <span>💻 ›</span>
+          <span id="detected-os-badge">💻 ›</span>
         </div>
 
         <div class="download-section-title">Скачать приложение</div>
@@ -1008,27 +906,24 @@
       </div>
     </div>
 
-    <!-- ТАБ 2: УСТАНОВКА (ВИЗАРД) -->
+    <!-- TAB 2: УСТАНОВКА -->
     <div id="tab-install" class="tab-page">
       <div class="wizard-key-strip">
         <div class="strip-left">
           <span class="icon">⚡️</span>
           <div>
-            <div style="font-weight:700;">VLESS 10 дней (глушилки)</div>
-            <div class="strip-meta">№263828 · 15 дн. · 26 окт. 2026 г.</div>
+            <div style="font-weight:700;" id="strip-sub-title">Santy VLESS Ultra</div>
+            <div class="strip-meta" id="strip-sub-meta">Ключ активен · Безлимитный трафик</div>
           </div>
         </div>
-        <div class="strip-trash" onclick="alert('Ключ сброшен')">🗑</div>
+        <div class="strip-trash" onclick="resetActiveKey()">🗑</div>
       </div>
 
-      <!-- Шаг 1 -->
       <div id="wizard-step1">
         <div class="wizard-body">
-          <div class="wizard-title" id="wiz-os-title">Настройка на Windows</div>
+          <div class="wizard-title" id="wiz-os-title">Настройка устройства</div>
           <div class="wizard-subtitle">Настройка VPN происходит в 3 шага и занимает пару минут</div>
-          <div class="circle-glow-icon">
-            <span>🔌</span>
-          </div>
+          <div class="circle-glow-icon"><span>🔌</span></div>
           <div class="wizard-buttons">
             <button class="btn-primary-teal" onclick="nextWizard(2)">Начать настройку на этом устройстве</button>
             <button class="btn-secondary-dark" onclick="showOtherDevices()">Установить на другом устройстве</button>
@@ -1036,38 +931,31 @@
         </div>
       </div>
 
-      <!-- Шаг 2 -->
       <div id="wizard-step2" style="display: none;">
         <div class="wizard-body">
           <div class="wizard-title">Приложение</div>
-          <div class="wizard-subtitle">Установите приложение <b id="app-download-name">Happ / Incy</b> и вернитесь к этому экрану</div>
-          <div class="circle-glow-icon spinning">
-            <span>📥</span>
-          </div>
+          <div class="wizard-subtitle">Установите клиент <b id="app-download-name">Incy / Happ</b> и вернитесь к этому экрану</div>
+          <div class="circle-glow-icon spinning"><span>📥</span></div>
           <div class="wizard-buttons">
-            <button class="btn-primary-teal" onclick="simulateDownload()">📥 Установить приложение</button>
+            <button class="btn-primary-teal" onclick="simulateDownload()">📥 Скачать приложение</button>
             <button class="btn-secondary-dark" onclick="nextWizard(3)">Следующий шаг ➔</button>
           </div>
         </div>
       </div>
 
-      <!-- Шаг 3 -->
       <div id="wizard-step3" style="display: none;">
         <div class="wizard-body">
           <div class="wizard-title">Вход</div>
           <div class="wizard-subtitle">Приложение установлено? Нажмите кнопку для входа</div>
-          <div class="circle-glow-icon">
-            <span>➔]</span>
-          </div>
+          <div class="circle-glow-icon"><span>➔]</span></div>
           <div class="wizard-buttons">
             <button class="btn-primary-teal" onclick="launchDeepLink()">➔ Войти в приложение</button>
-            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Логин и пароль вводить не нужно — вход в ваш аккаунт произойдёт автоматически.</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Логин и пароль вводить не нужно — профиль добавится автоматически.</div>
             <button class="btn-secondary-dark" onclick="nextWizard(4)" style="margin-top: 10px;">Я уже вошёл ➔</button>
           </div>
         </div>
       </div>
 
-      <!-- Шаг 4: Салют -->
       <div id="wizard-step4" style="display: none;">
         <div class="wizard-body">
           <div class="wizard-title" style="color: var(--accent-green);">Готово! 🎉</div>
@@ -1081,51 +969,35 @@
         </div>
       </div>
 
-      <!-- Выбор платформы -->
       <div id="wizard-platforms" style="display: none;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px; cursor:pointer;" onclick="nextWizard(1)">
           <span>‹</span> <b>Назад</b>
         </div>
         <div style="font-size:14px; color:var(--text-muted); margin-bottom:12px;">Выберите платформу:</div>
         <div class="platform-row" onclick="selectPlatform('iOS')">
-          <div class="platform-left"><span>🍎</span><span>iPhone / iPad</span></div>
-          <span>›</span>
+          <div class="platform-left"><span>🍎</span><span>iPhone / iPad</span></div><span>›</span>
         </div>
         <div class="platform-row" onclick="selectPlatform('Android')">
-          <div class="platform-left"><span>🤖</span><span>Android</span></div>
-          <span>›</span>
+          <div class="platform-left"><span>🤖</span><span>Android</span></div><span>›</span>
         </div>
         <div class="platform-row" onclick="selectPlatform('macOS')">
-          <div class="platform-left"><span>💻</span><span>macOS</span></div>
-          <span>›</span>
+          <div class="platform-left"><span>💻</span><span>macOS</span></div><span>›</span>
         </div>
         <div class="platform-row" onclick="selectPlatform('Windows')">
-          <div class="platform-left"><span>🖥</span><span>Windows</span></div>
-          <span>›</span>
+          <div class="platform-left"><span>🖥</span><span>Windows</span></div><span>›</span>
         </div>
       </div>
     </div>
 
-    <!-- ТАБ 3: ПРОФИЛЬ -->
+    <!-- TAB 3: ПРОФИЛЬ -->
     <div id="tab-profile" class="tab-page">
       <div class="profile-card" style="margin-top: 10px;">
         <div class="profile-header-user">
           <div>
-            <div class="user-big-name">wackzzy</div>
-            <div class="user-tg-id">id: 222972</div>
+            <div class="user-big-name" id="profile-name">Пользователь</div>
+            <div class="user-tg-id" id="profile-id">ID: —</div>
           </div>
           <div class="copy-icon-btn" onclick="copyId()">📋</div>
-        </div>
-      </div>
-
-      <div class="balances-row" style="margin-bottom: 10px;">
-        <div class="balance-box">
-          <div><div class="label">Баланс</div><div class="val">0 ₽</div></div>
-          <div class="icon">💳</div>
-        </div>
-        <div class="balance-box">
-          <div><div class="label">Бонусы</div><div class="val" style="color: var(--accent-teal);">0 ₽</div></div>
-          <div class="icon">⭐</div>
         </div>
       </div>
 
@@ -1136,10 +1008,10 @@
             <div class="menu-icon-square">📦</div>
             <div>
               <div class="menu-title">Мои подписки</div>
-              <div class="menu-subtitle">1 активных</div>
+              <div class="menu-subtitle" id="profile-sub-status">1 активна</div>
             </div>
           </div>
-          <div class="badge-count">1</div>
+          <div class="badge-count" id="profile-sub-count">1</div>
         </div>
 
         <div class="menu-row" onclick="openModal('devicesDrawer')">
@@ -1147,7 +1019,7 @@
             <div class="menu-icon-square">📱</div>
             <div>
               <div class="menu-title">Управление устройствами</div>
-              <div class="menu-subtitle">Лимит: 10 устройств</div>
+              <div class="menu-subtitle" id="profile-dev-subtitle">Активные сессии</div>
             </div>
           </div>
           <span>›</span>
@@ -1157,8 +1029,8 @@
           <div class="menu-left">
             <div class="menu-icon-square">💳</div>
             <div>
-              <div class="menu-title">Способы оплаты</div>
-              <div class="menu-subtitle">Управление привязанными картами</div>
+              <div class="menu-title">Сменить тариф / Продлить</div>
+              <div class="menu-subtitle">Выбор периода и способов оплаты</div>
             </div>
           </div>
           <span>›</span>
@@ -1169,7 +1041,7 @@
             <div class="menu-icon-square">🎁</div>
             <div>
               <div class="menu-title">Реферальная программа</div>
-              <div class="menu-subtitle">0 ₽ бонусов накоплено</div>
+              <div class="menu-subtitle">+14 дней за каждого друга</div>
             </div>
           </div>
           <span>›</span>
@@ -1189,10 +1061,10 @@
 
       <div class="section-label">Почта</div>
       <div class="email-box">
-        <div class="email-left">
+        <div style="display:flex; align-items:center; gap:12px;">
           <span style="font-size: 20px; color: var(--accent-teal);">✉️</span>
           <div>
-            <div style="font-size: 13px; font-weight: 700;">Почта не привязана</div>
+            <div style="font-size: 13px; font-weight: 700;" id="email-status-text">Почта не привязана</div>
             <div style="font-size: 11px; color: var(--text-muted);">Запасной вход, если потеряете Telegram</div>
           </div>
         </div>
@@ -1211,22 +1083,12 @@
 
       <div class="section-label">Поддержка</div>
       <div class="profile-card" style="margin-bottom: 24px;">
-        <div class="menu-row" onclick="openModal('chatDrawer')">
+        <div class="menu-row" onclick="openSupportChat()">
           <div class="menu-left">
             <div class="menu-icon-square">💬</div>
             <div>
               <div class="menu-title">Связаться с поддержкой</div>
-              <div class="menu-subtitle">Решение проблем онлайн</div>
-            </div>
-          </div>
-          <span>›</span>
-        </div>
-        <div class="menu-row" onclick="alert('Пользовательское соглашение SantyVPN принято.')">
-          <div class="menu-left">
-            <div class="menu-icon-square">📄</div>
-            <div>
-              <div class="menu-title">Пользовательское соглашение</div>
-              <div class="menu-subtitle">Соглашения и правила сервиса</div>
+              <div class="menu-subtitle">Прямой диалог с менеджером</div>
             </div>
           </div>
           <span>›</span>
@@ -1234,47 +1096,35 @@
       </div>
     </div>
 
-    <!-- ТАБ 4: ПОДДЕРЖКА -->
+    <!-- TAB 4: ПОДДЕРЖКА -->
     <div id="tab-support" class="tab-page">
       <div class="profile-card" style="margin-top: 10px;">
         <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
           <div class="menu-icon-square" style="width:44px; height:44px; font-size:22px;">💬</div>
           <div>
-            <div style="font-size:18px; font-weight:800;">Поддержка</div>
-            <div style="font-size:12px; color:var(--text-muted);">Получите ответы на популярные вопросы или обратитесь за помощью</div>
+            <div style="font-size:18px; font-weight:800;">Поддержка SantyVPN</div>
+            <div style="font-size:12px; color:var(--text-muted);">Ответы на вопросы и помощь специалистов</div>
           </div>
         </div>
       </div>
 
       <div class="profile-card">
-        <div class="menu-row" onclick="showFaqScreen()">
+        <div class="menu-row" onclick="openSupportChat()">
           <div class="menu-left">
-            <div class="menu-icon-square">❓</div>
+            <div class="menu-icon-square">🎧</div>
             <div>
-              <div class="menu-title">Часто задаваемые вопросы</div>
-              <div class="menu-subtitle">Ответы на популярные вопросы</div>
+              <div class="menu-title">Написать менеджеру в Telegram</div>
+              <div class="menu-subtitle">Среднее время ответа — 2 минуты</div>
             </div>
           </div>
           <span>›</span>
         </div>
-
         <div class="menu-row" onclick="switchTab('install'); showOtherDevices();">
           <div class="menu-left">
             <div class="menu-icon-square">⚙️</div>
             <div>
-              <div class="menu-title">Установка на другом устройстве</div>
-              <div class="menu-subtitle">Подробная инструкция для установки</div>
-            </div>
-          </div>
-          <span>›</span>
-        </div>
-
-        <div class="menu-row" onclick="openModal('chatDrawer')">
-          <div class="menu-left">
-            <div class="menu-icon-square">🎧</div>
-            <div>
-              <div class="menu-title">Чат поддержки</div>
-              <div class="menu-subtitle">Написать оператору прямо в приложении</div>
+              <div class="menu-title">Инструкция по установке</div>
+              <div class="menu-subtitle">iOS, Android, Windows, macOS</div>
             </div>
           </div>
           <span>›</span>
@@ -1291,39 +1141,25 @@
         <div id="faq-cat-connect">
           <div class="faq-accordion-item" onclick="this.classList.toggle('open')">
             <div class="faq-acc-header"><span>Как подключиться к VPN?</span><span>▼</span></div>
-            <div class="faq-acc-body">Перейдите в раздел «Установка», выберите свою платформу (iOS, Android, Windows, macOS) и следуйте пошаговой инструкции. Вам понадобится установить приложение (Incy на iPhone/iPad, Happ на остальных платформах) и добавить ссылку на подписку.</div>
+            <div class="faq-acc-body">Перейдите в раздел «Установка», скачайте приложение (Incy на iOS, Happ на других системах) и нажмите кнопку «Войти в 1 клик». Профиль добавится автоматически.</div>
           </div>
-
           <div class="faq-accordion-item" onclick="this.classList.toggle('open')">
-            <div class="faq-acc-header"><span>Какое приложение нужно установить?</span><span>▼</span></div>
-            <div class="faq-acc-body">На iPhone/iPad используется приложение Incy (App Store), на Android (Google Play / APK), Windows и macOS — Happ. Ссылки на скачивание есть в разделе «Установка».</div>
-          </div>
-
-          <div class="faq-accordion-item" onclick="this.classList.toggle('open')">
-            <div class="faq-acc-header"><span>Как добавить ссылку на подписку?</span><span>▼</span></div>
-            <div class="faq-acc-body">Скопируйте ссылку на подписку в разделе «Установка» и вставьте её в приложение. На iOS/Android можно просто нажать «Войти в 1 клик» — приложение откроется автоматически.</div>
+            <div class="faq-acc-header"><span>Какие протоколы используются?</span><span>▼</span></div>
+            <div class="faq-acc-body">SantyVPN работает на современных протоколах VLESS с Reality и AmneziaWG, которые устойчивы к блокировкам мобильных операторов и провайдеров.</div>
           </div>
         </div>
 
         <div id="faq-cat-pay" style="display: none;">
           <div class="faq-accordion-item" onclick="this.classList.toggle('open')">
-            <div class="faq-acc-header"><span>Как оплатить подписку?</span><span>▼</span></div>
-            <div class="faq-acc-body">Нажмите кнопку «Продлить подписку» на главном экране. Выберите удобный способ оплаты из доступных вариантов и следуйте инструкциям.</div>
-          </div>
-          <div class="faq-accordion-item" onclick="this.classList.toggle('open')">
-            <div class="faq-acc-header"><span>Как работает автоплатёж?</span><span>▼</span></div>
-            <div class="faq-acc-body">При первой оплате вы можете сохранить способ оплаты. В дальнейшем подписка будет продлеваться автоматически. Автоплатёж можно отменить в любой момент в профиле.</div>
+            <div class="faq-acc-header"><span>Какие способы оплаты доступны?</span><span>▼</span></div>
+            <div class="faq-acc-body">Доступны банковские карты РФ (МИР, Visa, Mastercard), СБП, Telegram Stars и криптовалюта (USDT / TON).</div>
           </div>
         </div>
 
         <div id="faq-cat-device" style="display: none;">
           <div class="faq-accordion-item" onclick="this.classList.toggle('open')">
             <div class="faq-acc-header"><span>Сколько устройств можно подключить?</span><span>▼</span></div>
-            <div class="faq-acc-body">Количество устройств зависит от вашего тарифа (базовый тариф поддерживает до 10 устройств). Текущий лимит и список подключённых устройств отображаются в профиле.</div>
-          </div>
-          <div class="faq-accordion-item" onclick="this.classList.toggle('open')">
-            <div class="faq-acc-header"><span>Как удалить старое устройство?</span><span>▼</span></div>
-            <div class="faq-acc-body">В разделе «Профиль» нажмите «Управление устройствами». В открывшемся списке нажмите иконку корзины рядом с ненужным устройством.</div>
+            <div class="faq-acc-body">Базовая подписка поддерживает до 10 ваших устройств. Список подключенных гаджетов можно просматривать и редактировать в профиле.</div>
           </div>
         </div>
       </div>
@@ -1342,79 +1178,60 @@
       <div class="profile-card" style="border-color: rgba(0, 229, 255, 0.3);">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
           <div>
-            <div style="font-size:16px; font-weight:800;">VLESS 10 дней (глушилки)</div>
-            <div style="font-size:12px; color:var(--text-muted);">№263828</div>
+            <div style="font-size:16px; font-weight:800;" id="modal-sub-name">Santy VLESS Ultra</div>
+            <div style="font-size:12px; color:var(--text-muted);" id="modal-sub-id">Личный ключ</div>
           </div>
           <span class="status-chip" style="font-size:11px; padding:3px 8px;">Активна</span>
         </div>
-        <div style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">
-          0 ₽ · 📅 26 октября 2026 г.
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom:14px;" id="modal-sub-expire">
+          Без ограничений скорости
         </div>
 
-        <div style="display:grid; grid-template-columns: 1fr auto; gap:8px; margin-bottom:10px;">
-          <button class="btn-primary-teal" onclick="closeModal('mySubsDrawer'); switchTab('install');" style="padding:12px;">
-            ⚙️ Установка
-          </button>
-          <button class="strip-trash" onclick="alert('Подписка удалена'); closeModal('mySubsDrawer');" style="width:44px; height:44px; border-radius:10px;">
-            🗑
-          </button>
-        </div>
-
-        <button class="btn-secondary-dark" onclick="closeModal('mySubsDrawer'); openModal('tariffsDrawer');" style="width:100%; margin-bottom:8px;">
-          ⇄ Сменить тариф
+        <button class="btn-primary-teal" onclick="closeModal('mySubsDrawer'); switchTab('install');" style="margin-bottom:8px;">
+          ⚙️ Установка и подключение
         </button>
-        <button class="btn-secondary-dark" onclick="closeModal('mySubsDrawer'); openModal('devicesDrawer');" style="width:100%;">
-          📱 Устройства
+        <button class="btn-secondary-dark" onclick="closeModal('mySubsDrawer'); openModal('tariffsDrawer');" style="width:100%;">
+          ⇄ Продлить / Сменить тариф
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ШТОРКА: СМЕНА ТАРИФА -->
+  <!-- ШТОРКА: ТАРИФЫ -->
   <div id="tariffsDrawer" class="modal-overlay" onclick="if(event.target===this)closeModal('tariffsDrawer')">
     <div class="modal-drawer">
       <div class="drawer-header">
-        <div class="drawer-title">Смена тарифа SantyVPN</div>
+        <div class="drawer-title">Выбор тарифа SantyVPN</div>
         <div class="drawer-close" onclick="closeModal('tariffsDrawer')">✕</div>
       </div>
 
-      <div style="font-size:12px; font-weight:700; color:var(--accent-teal); margin-bottom:10px;">VLESS ULTRA (СЕРВЕРЫ 🇩🇪 🇳🇱 🇺🇸 🇫🇮)</div>
-
-      <div class="tariff-item-row" onclick="chooseTariff('Тест 7 дней', '1 ₽')">
+      <div class="tariff-item-row" onclick="selectPlan('Пробный период (7 дней)', '1 ₽', 7)">
         <div>
-          <div class="tariff-title-bold">VLESS 7 дней DEUSFI <span class="tag-trial">Тест</span></div>
-          <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Автопривязка карты, безлимит</div>
+          <div class="tariff-title-bold">🎁 Пробный период 7 дней <span class="tag-trial">Тест</span></div>
+          <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Автопривязка карты, полный доступ</div>
         </div>
         <div class="tariff-price-strong" style="color:var(--accent-teal);">1 ₽</div>
       </div>
 
-      <div class="tariff-item-row" onclick="chooseTariff('1 месяц', '200 ₽')">
+      <div class="tariff-item-row" onclick="selectPlan('1 месяц', '200 ₽', 30)">
         <div>
-          <div class="tariff-title-bold">VLESS 1 месяц DEUSFI</div>
-          <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">10 устройств, до 1 Гбит/с</div>
+          <div class="tariff-title-bold">🌐 Стандарт (1 месяц)</div>
+          <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">До 10 устройств, безлимитный трафик</div>
         </div>
         <div class="tariff-price-strong">200 ₽</div>
       </div>
 
-      <div class="tariff-item-row" onclick="chooseTariff('3 месяца', '520 ₽')">
+      <div class="tariff-item-row" onclick="selectPlan('3 месяца', '520 ₽', 90)">
         <div>
-          <div class="tariff-title-bold">VLESS 3 месяца DEUSFI <span class="tag-hit">-15%</span></div>
+          <div class="tariff-title-bold">⚡️ Оптимальный (3 месяца) <span class="tag-hit">-15%</span></div>
           <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Экономия 80 ₽</div>
         </div>
         <div class="tariff-price-strong">520 ₽</div>
       </div>
 
-      <div class="tariff-item-row" onclick="chooseTariff('6 месяцев', '960 ₽')">
+      <div class="tariff-item-row" onclick="selectPlan('12 месяцев', '1 760 ₽', 365)">
         <div>
-          <div class="tariff-title-bold">VLESS 6 месяцев DEUSFI <span class="tag-hit">-20%</span></div>
-          <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">160 ₽ в месяц</div>
-        </div>
-        <div class="tariff-price-strong">960 ₽</div>
-      </div>
-
-      <div class="tariff-item-row" onclick="chooseTariff('12 месяцев', '1 760 ₽')">
-        <div>
-          <div class="tariff-title-bold">VLESS 12 месяцев DEUSFI <span class="tag-hit">ХИТ 🔥</span></div>
+          <div class="tariff-title-bold">🔥 Максимум (12 месяцев) <span class="tag-hit">ХИТ 🔥</span></div>
           <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Всего 146 ₽ в месяц</div>
         </div>
         <div class="tariff-price-strong" style="color:var(--accent-green);">1 760 ₽</div>
@@ -1427,32 +1244,14 @@
     <div class="modal-drawer">
       <div class="drawer-header">
         <div>
-          <div class="drawer-title">Устройства</div>
-          <div style="font-size:12px; color:var(--text-muted);">Лимит: 10 устройств</div>
+          <div class="drawer-title">Подключенные устройства</div>
+          <div style="font-size:12px; color:var(--text-muted);" id="device-count-label">Активно: 1 из 10</div>
         </div>
         <div class="drawer-close" onclick="closeModal('devicesDrawer')">✕</div>
       </div>
 
-      <div class="device-manage-row">
-        <div class="device-manage-left">
-          <span class="device-manage-icon">💻</span>
-          <div>
-            <div class="device-name-bold">DESKTOP-CTQNAAR_x86_64</div>
-            <div class="device-date-small">Windows · Онлайн</div>
-          </div>
-        </div>
-        <button class="btn-trash-device" onclick="deleteDevice(this)">🗑</button>
-      </div>
-
-      <div class="device-manage-row">
-        <div class="device-manage-left">
-          <span class="device-manage-icon">📱</span>
-          <div>
-            <div class="device-name-bold">23021RAA2Y (Xiaomi)</div>
-            <div class="device-date-small">Android · Вчера в 21:40</div>
-          </div>
-        </div>
-        <button class="btn-trash-device" onclick="deleteDevice(this)">🗑</button>
+      <div id="devices-list-container">
+        <!-- Генерируется динамически -->
       </div>
     </div>
   </div>
@@ -1466,26 +1265,18 @@
       </div>
 
       <div class="profile-card" style="margin-bottom:12px;">
-        <div style="font-size:12px; color:var(--text-muted); margin-bottom:6px;">Ссылка для Telegram:</div>
-        <div style="background:var(--card-inner); padding:10px; border-radius:8px; font-size:13px; font-family:monospace; margin-bottom:10px; word-break:break-all;" id="ref-tg-link">
-          https://t.me/SantyVpn_bot?start=222972
+        <div style="font-size:12px; color:var(--text-muted); margin-bottom:6px;">Ваша персональная ссылка:</div>
+        <div style="background:var(--card-inner); padding:10px; border-radius:8px; font-size:13px; font-family:monospace; margin-bottom:10px; word-break:break-all;" id="ref-link-display">
+          https://t.me/SantyVpn_bot?start=ref_user
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <button class="btn-secondary-dark" onclick="copyRef()">📋 Копировать</button>
-          <button class="btn-primary-teal" onclick="shareRef()" style="padding:10px;">📢 Поделиться</button>
+          <button class="btn-secondary-dark" onclick="copyRefLink()">📋 Копировать</button>
+          <button class="btn-primary-teal" onclick="shareRefLink()" style="padding:10px;">📢 Поделиться</button>
         </div>
       </div>
 
-      <div class="balance-box" style="margin-bottom:14px;">
-        <div><div class="label">Накоплено бонусов</div><div class="val" style="color:var(--accent-teal);">0 ₽</div></div>
-        <span style="font-size:24px;">🎁</span>
-      </div>
-
-      <div style="font-size:14px; font-weight:700; margin-bottom:10px;">Как это работает:</div>
       <div style="font-size:13px; color:var(--text-muted); line-height:1.6;">
-        1. Отправьте ссылку другу.<br>
-        2. Друг активирует тест и оплачивает подписку.<br>
-        3. Вы получаете 50% с его платежа или +14 дней бесплатного VPN!
+        Приглашайте друзей в SantyVPN: вы получаете <b>+14 дней подписки</b> за каждого приглашенного пользователя, а друг — скидку на первую оплату!
       </div>
     </div>
   </div>
@@ -1497,85 +1288,150 @@
         <div class="drawer-title">Промокод</div>
         <div class="drawer-close" onclick="closeModal('promoDrawer')">✕</div>
       </div>
-
-      <div style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Введите промокод от партнера или канала:</div>
       <div style="display:flex; gap:8px; margin-bottom:14px;">
         <input type="text" id="promo-input" placeholder="ВВЕДИТЕ ПРОМОКОД" style="flex:1; background:var(--card-inner); border:1px solid var(--card-border); border-radius:10px; padding:12px; color:#fff; font-size:14px; text-transform:uppercase;">
-        <button class="btn-primary-teal" onclick="applyPromo()" style="width:auto; padding:0 20px;">ОК</button>
+        <button class="btn-primary-teal" onclick="applyPromoCode()" style="width:auto; padding:0 20px;">ОК</button>
       </div>
     </div>
   </div>
 
-  <!-- ШТОРКА: ПРИВЯЗКА ПОЧТЫ -->
+  <!-- ШТОРКА: ПОЧТА -->
   <div id="emailDrawer" class="modal-overlay" onclick="if(event.target===this)closeModal('emailDrawer')">
     <div class="modal-drawer">
       <div class="drawer-header">
-        <div class="drawer-title">Привязка резервной почты</div>
+        <div class="drawer-title">Привязка email</div>
         <div class="drawer-close" onclick="closeModal('emailDrawer')">✕</div>
       </div>
-      <div style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">На почту придет код для привязки. Это защитит ваш профиль при потере Telegram-аккаунта.</div>
-      <input type="email" placeholder="Ваш email (example@mail.ru)" style="width:100%; background:var(--card-inner); border:1px solid var(--card-border); border-radius:10px; padding:13px; color:#fff; font-size:14px; margin-bottom:12px;">
-      <button class="btn-primary-teal" onclick="alert('Код отправлен на почту!'); closeModal('emailDrawer');">Получить код</button>
-    </div>
-  </div>
-
-  <!-- ШТОРКА: ВСТРОЕННЫЙ ЧАТ ПОДДЕРЖКИ -->
-  <div id="chatDrawer" class="modal-overlay" onclick="if(event.target===this)closeModal('chatDrawer')">
-    <div class="modal-drawer" style="max-height:90vh;">
-      <div class="drawer-header">
-        <div>
-          <div class="drawer-title">Чат поддержки Santy</div>
-          <div style="font-size:11px; color:var(--text-muted);">Оператор ответит прямо в этом окне</div>
-        </div>
-        <div class="drawer-close" onclick="closeModal('chatDrawer')">✕</div>
-      </div>
-
-      <div class="inapp-chat-box">
-        <div class="chat-messages-scroll" id="chat-messages-list">
-          <div class="chat-bubble bot">👋 Здравствуйте! Чем можем помочь по настройке SantyVPN?</div>
-        </div>
-        <div class="chat-input-bar">
-          <input type="text" id="chat-msg-input" class="chat-text-input" placeholder="Напишите сообщение..." onkeydown="if(event.key==='Enter')sendChatMsg()">
-          <button class="btn-primary-teal" onclick="sendChatMsg()" style="width:auto; padding:0 16px;">➤</button>
-        </div>
-      </div>
+      <input type="email" id="email-input-field" placeholder="ваш_email@domain.com" style="width:100%; background:var(--card-inner); border:1px solid var(--card-border); border-radius:10px; padding:13px; color:#fff; font-size:14px; margin-bottom:12px;">
+      <button class="btn-primary-teal" onclick="saveUserEmail()">Привязать</button>
     </div>
   </div>
 
   <!-- Нижний таб-бар -->
   <nav class="bottom-navbar">
     <button class="nav-tab-btn active" onclick="switchTab('home')">
-      <span class="nav-tab-icon">🛡</span>
+      <span style="font-size:20px;">🛡</span>
       <span>Главная</span>
       <div class="nav-dot"></div>
     </button>
     <button class="nav-tab-btn" onclick="switchTab('install')">
-      <span class="nav-tab-icon">⚙️</span>
+      <span style="font-size:20px;">⚙️</span>
       <span>Установка</span>
       <div class="nav-dot"></div>
     </button>
     <button class="nav-tab-btn" onclick="switchTab('profile')">
-      <span class="nav-tab-icon">👤</span>
+      <span style="font-size:20px;">👤</span>
       <span>Профиль</span>
       <div class="nav-dot"></div>
     </button>
     <button class="nav-tab-btn" onclick="switchTab('support')">
-      <span class="nav-tab-icon">💬</span>
+      <span style="font-size:20px;">💬</span>
       <span>Поддержка</span>
       <div class="nav-dot"></div>
     </button>
   </nav>
 
+  <!-- Скрипт: 100% динамическая подгрузка под текущего пользователя -->
   <script>
-    if (window.Telegram && window.Telegram.WebApp) {
-      window.Telegram.WebApp.ready();
-      window.Telegram.WebApp.expand();
-      const user = window.Telegram.WebApp.initDataUnsafe?.user;
-      if (user && user.first_name) {
-        document.getElementById('display-user').innerText = user.username || user.first_name;
+    // 1. Инициализация Telegram WebApp
+    const tg = window.Telegram?.WebApp;
+    if (tg) {
+      tg.ready();
+      tg.expand();
+    }
+
+    // 2. Извлечение реальных данных ТЕКУЩЕГО пользователя
+    const currentUser = tg?.initDataUnsafe?.user;
+    const currentUserId = currentUser?.id || (localStorage.getItem('santy_uid') || Math.floor(100000 + Math.random() * 900000));
+    localStorage.setItem('santy_uid', currentUserId);
+
+    const currentUserName = currentUser?.first_name 
+      ? (currentUser.username ? `@${currentUser.username}` : currentUser.first_name)
+      : 'Пользователь';
+
+    // 3. Подстановка данных пользователя в интерфейс
+    document.getElementById('display-user').innerText = currentUserName;
+    document.getElementById('profile-name').innerText = currentUserName;
+    document.getElementById('profile-id').innerText = 'ID: ' + currentUserId;
+    document.getElementById('ref-link-display').innerText = `https://t.me/SantyVpn_bot?start=ref_${currentUserId}`;
+
+    // 4. Определение устройства пользователя
+    function detectUserOS() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) return 'iOS';
+      if (/android/i.test(userAgent)) return 'Android';
+      if (/Mac/i.test(userAgent)) return 'macOS';
+      return 'Windows';
+    }
+    const userOS = detectUserOS();
+    document.getElementById('detected-os-badge').innerText = (userOS === 'iOS' || userOS === 'macOS' ? '🍏 ' : (userOS === 'Android' ? '🤖 ' : '💻 ')) + userOS + ' ›';
+    document.getElementById('wiz-os-title').innerText = 'Настройка на ' + userOS;
+    document.getElementById('app-download-name').innerText = (userOS === 'iOS' ? 'Incy (App Store)' : 'Happ');
+
+    // 5. Динамическое управление устройствами текущего пользователя
+    let myDevices = JSON.parse(localStorage.getItem('santy_devices') || 'null');
+    if (!myDevices) {
+      myDevices = [
+        { id: 1, name: 'Текущее устройство (' + userOS + ')', time: 'Активно сейчас' }
+      ];
+      localStorage.setItem('santy_devices', JSON.stringify(myDevices));
+    }
+
+    function renderDevicesList() {
+      const container = document.getElementById('devices-list-container');
+      container.innerHTML = '';
+      myDevices.forEach((dev, index) => {
+        const row = document.createElement('div');
+        row.className = 'device-manage-row';
+        row.innerHTML = `
+          <div class="device-manage-left">
+            <span style="color:var(--accent-teal); font-size:18px;">📱</span>
+            <div>
+              <div style="font-size:14px; font-weight:700;">${dev.name}</div>
+              <div style="font-size:11px; color:var(--text-muted);">${dev.time}</div>
+            </div>
+          </div>
+          <button class="btn-trash-device" onclick="removeDevice(${index})">🗑</button>
+        `;
+        container.appendChild(row);
+      });
+      document.getElementById('device-count-label').innerText = `Активно: ${myDevices.length} из 10`;
+      document.getElementById('device-limit-pill').innerText = `${myDevices.length} из 10 устройств 📱`;
+    }
+    renderDevicesList();
+
+    function removeDevice(index) {
+      myDevices.splice(index, 1);
+      localStorage.setItem('santy_devices', JSON.stringify(myDevices));
+      renderDevicesList();
+      alert('Устройство отключено.');
+    }
+
+    // 6. Управление тарифами и датой окончания подписки
+    function selectPlan(name, price, days) {
+      const expireDate = new Date(Date.now() + days * 86400000);
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      const dateString = expireDate.toLocaleDateString('ru-RU', options);
+
+      document.getElementById('sub-expire-text').innerText = 'Активна до ' + dateString + ' г.';
+      closeModal('tariffsDrawer');
+      alert(`Тариф "${name}" успешно активирован за ${price}! Подписка продлена до ${dateString}.`);
+      fireConfetti();
+    }
+
+    function generateNewKey() {
+      const newKeyId = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('key-number-text').innerText = 'Ключ #' + newKeyId;
+      alert(`Сгенерирован новый персональный ключ #${newKeyId}!`);
+    }
+
+    function resetActiveKey() {
+      if (confirm('Сбросить текущий ключ и выпустить новый?')) {
+        generateNewKey();
       }
     }
 
+    // 7. Навигация по табам
     function switchTab(tabName) {
       document.querySelectorAll('.tab-page').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-tab-btn').forEach(el => el.classList.remove('active'));
@@ -1605,9 +1461,7 @@
       document.getElementById('wizard-step4').style.display = step === 4 ? 'block' : 'none';
       document.getElementById('wizard-platforms').style.display = 'none';
 
-      if (step === 4) {
-        fireConfetti();
-      }
+      if (step === 4) fireConfetti();
     }
 
     function showOtherDevices() {
@@ -1623,88 +1477,67 @@
     }
 
     function simulateDownload() {
-      alert('Файл приложения скачивается... После установки нажмите «Следующий шаг»');
+      alert('Загрузка клиента для вашей системы начата. После установки нажмите «Следующий шаг».');
       nextWizard(3);
     }
 
     function launchDeepLink() {
-      window.location.href = "happ://add/vless://santyvpn-test@node.santyvpn.net:443";
-      setTimeout(() => {
-        nextWizard(4);
-      }, 1000);
+      window.location.href = `happ://add/vless://santy-${currentUserId}@node.santyvpn.net:443?security=reality#SantyVPN`;
+      setTimeout(() => { nextWizard(4); }, 800);
     }
 
-    function openModal(id) {
-      document.getElementById(id).classList.add('active');
-    }
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('active');
-    }
+    // 8. Модалки
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-    function chooseTariff(name, price) {
-      alert('Выбран тариф: ' + name + ' за ' + price + '. Открывается платежный шлюз СБП / Карты / Stars...');
-      closeModal('tariffsDrawer');
-    }
-
-    function deleteDevice(btn) {
-      btn.closest('.device-manage-row').remove();
-      alert('Устройство успешно отключено от сети!');
-    }
-
+    // 9. Рефералка и копирование
     function copyId() {
-      navigator.clipboard.writeText("222972");
-      alert("ID 222972 скопирован!");
+      navigator.clipboard.writeText(String(currentUserId));
+      alert(`ID ${currentUserId} скопирован в буфер обмена!`);
     }
-    function copyRef() {
-      navigator.clipboard.writeText(document.getElementById('ref-tg-link').innerText.trim());
-      alert("Реферальная ссылка скопирована!");
+
+    function copyRefLink() {
+      const link = document.getElementById('ref-link-display').innerText.trim();
+      navigator.clipboard.writeText(link);
+      alert('Ваша реферальная ссылка скопирована!');
     }
-    function shareRef() {
-      const link = document.getElementById('ref-tg-link').innerText.trim();
-      window.open("https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent("Попробуй скоростной SantyVPN бесплатно на 7 дней!"));
+
+    function shareRefLink() {
+      const link = document.getElementById('ref-link-display').innerText.trim();
+      window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent("Попробуй быстрый SantyVPN с тестовым периодом!")}`);
     }
-    function applyPromo() {
+
+    function applyPromoCode() {
       const val = document.getElementById('promo-input').value.trim();
       if (val) {
-        alert('Промокод ' + val + ' успешно активирован! Начислено +7 дней подписки.');
+        alert(`Промокод "${val}" применен! Начислено +7 дней подписки.`);
         closeModal('promoDrawer');
-      } else {
-        alert('Введите промокод!');
       }
+    }
+
+    function saveUserEmail() {
+      const mail = document.getElementById('email-input-field').value.trim();
+      if (mail) {
+        document.getElementById('email-status-text').innerText = mail;
+        alert(`Резервная почта ${mail} успешно привязана!`);
+        closeModal('emailDrawer');
+      }
+    }
+
+    function openSupportChat() {
+      window.open('https://t.me/santyvpn_support', '_blank');
+    }
+
+    function openChannel() {
+      window.open('https://t.me/santyvpn_channel', '_blank');
     }
 
     function switchFaqCat(chip, cat) {
       document.querySelectorAll('.faq-chip').forEach(el => el.classList.remove('active'));
       chip.classList.add('active');
-
       document.getElementById('faq-cat-connect').style.display = cat === 'connect' ? 'block' : 'none';
       document.getElementById('faq-cat-pay').style.display = cat === 'pay' ? 'block' : 'none';
       document.getElementById('faq-cat-device').style.display = cat === 'device' ? 'block' : 'none';
-    }
-
-    function showFaqScreen() {
-      document.getElementById('faq-section').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function sendChatMsg() {
-      const input = document.getElementById('chat-msg-input');
-      const text = input.value.trim();
-      if (!text) return;
-
-      const list = document.getElementById('chat-messages-list');
-      const userBubble = document.createElement('div');
-      userBubble.className = 'chat-bubble user';
-      userBubble.innerText = text;
-      list.appendChild(userBubble);
-      input.value = '';
-
-      setTimeout(() => {
-        const botBubble = document.createElement('div');
-        botBubble.className = 'chat-bubble bot';
-        botBubble.innerText = 'Менеджер получил ваш запрос по аккаунту #222972 и сейчас ответит вам в Telegram!';
-        list.appendChild(botBubble);
-        list.scrollTop = list.scrollHeight;
-      }, 700);
     }
 
     function toggleTheme() {
@@ -1734,11 +1567,7 @@
       }
     }
 
-    function openChannel() {
-      window.open('https://t.me/santyvpn_channel', '_blank');
-    }
-
-    /* Анимация праздничного салюта/конфетти */
+    // 10. Салют и конфетти на Canvas
     function fireConfetti() {
       const canvas = document.getElementById('confetti-canvas');
       const ctx = canvas.getContext('2d');
