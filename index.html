@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <title>SantyVPN</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
@@ -11,27 +12,27 @@
       --border: rgba(255,255,255,0.08); --text: #ffffff; --muted: #828c99;
       --cyan: #00e5ff; --cyan-glow: rgba(0,229,255,0.28);
       --green: #2ecc71; --amber: #f39c12; --danger: #ff4757;
-      --nav: rgba(17,21,26,0.9);
+      --nav: rgba(17,21,26,0.92);
       --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
     body.light {
       --bg: #f4f6f9; --card: #ffffff; --inner: #eaeff5;
       --border: rgba(0,0,0,0.08); --text: #0f172a; --muted: #64748b;
-      --nav: rgba(255,255,255,0.92);
+      --nav: rgba(255,255,255,0.94);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; user-select: none; }
-    body { background: var(--bg) radial-gradient(circle at 50% 0%, rgba(0,229,255,0.06), transparent 60%) no-repeat; color: var(--text); padding-bottom: 90px; overflow-x: hidden; min-height: 100vh; transition: background 0.3s, color 0.3s; }
+    body { background: var(--bg) radial-gradient(circle at 50% 0%, rgba(0,229,255,0.06), transparent 60%) no-repeat; color: var(--text); padding-bottom: 90px; overflow-x: hidden; min-height: 100vh; transition: background 0.25s, color 0.25s; }
     ::-webkit-scrollbar { width: 0; }
-    button { font-family: inherit; cursor: pointer; border: none; outline: none; transition: transform 0.18s var(--spring), box-shadow 0.2s, opacity 0.2s; }
+    button { font-family: inherit; cursor: pointer; border: none; outline: none; transition: transform 0.16s var(--spring), box-shadow 0.2s, opacity 0.2s; touch-action: manipulation; }
     button:active { transform: scale(0.94) !important; }
 
     /* Toast Notification */
-    #toast { position: fixed; top: 14px; left: 50%; transform: translate(-50%, -80px) scale(0.9); background: #1c2430; color: #fff; border: 1px solid var(--cyan); box-shadow: 0 8px 25px rgba(0,229,255,0.25); padding: 11px 18px; border-radius: 30px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; z-index: 9999; opacity: 0; pointer-events: none; transition: all 0.35s var(--spring); max-width: 92vw; text-align: center; }
+    #toast { position: fixed; top: 14px; left: 50%; transform: translate(-50%, -80px) scale(0.9); background: #1c2430; color: #fff; border: 1px solid var(--cyan); box-shadow: 0 8px 25px rgba(0,229,255,0.25); padding: 11px 18px; border-radius: 30px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; z-index: 9999; opacity: 0; pointer-events: none; transition: all 0.32s var(--spring); max-width: 92vw; text-align: center; }
     #toast.show { transform: translate(-50%, 0) scale(1); opacity: 1; }
 
     /* Header */
-    .header { padding: 14px 18px 10px; display: flex; justify-content: space-between; align-items: center; background: var(--nav); backdrop-filter: blur(14px); position: sticky; top: 0; z-index: 80; border-bottom: 1px solid var(--border); }
+    .header { padding: 14px 18px 10px; display: flex; justify-content: space-between; align-items: center; background: var(--nav); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); position: sticky; top: 0; z-index: 80; border-bottom: 1px solid var(--border); }
     .greet { font-size: 12px; color: var(--muted); }
     .uname { font-size: 20px; font-weight: 800; }
     .chip { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; border: 1px solid; transition: 0.3s; }
@@ -44,12 +45,12 @@
 
     /* Layout & Pages */
     .container { padding: 0 16px; max-width: 480px; margin: 0 auto; perspective: 1000px; }
-    .page { display: none; animation: pageIn 0.32s var(--ease) forwards; }
+    .page { display: none; animation: pageIn 0.28s var(--ease) forwards; will-change: transform, opacity; }
     .page.active { display: block; }
-    @keyframes pageIn { from { opacity: 0; transform: translateY(14px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
     /* Cards & 3D Tilt */
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 16px; margin-bottom: 14px; transition: transform 0.2s ease, border-color 0.25s, box-shadow 0.25s; transform-style: preserve-3d; position: relative; overflow: hidden; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 16px; margin-bottom: 14px; transition: transform 0.18s ease-out, border-color 0.25s, box-shadow 0.25s; transform-style: preserve-3d; position: relative; overflow: hidden; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0 14px; }
     .bal-card { margin: 0; display: flex; justify-content: space-between; align-items: center; padding: 13px 15px; border-radius: 14px; }
     .bal-val { font-size: 20px; font-weight: 800; margin-top: 3px; }
@@ -65,7 +66,8 @@
 
     /* Buttons */
     .btn-cyan { background: linear-gradient(135deg, #00e5ff, #0099ff); color: #051018; font-weight: 800; font-size: 15px; padding: 14px; border-radius: 13px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 18px var(--cyan-glow); position: relative; overflow: hidden; }
-    .btn-shine::after { content: ""; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent); transform: rotate(25deg); animation: shine 2.8s infinite; }
+    .btn-green { background: linear-gradient(135deg, #2ecc71, #27ae60); color: #fff; font-weight: 800; font-size: 15px; padding: 14px; border-radius: 13px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 18px rgba(46,204,113,0.3); }
+    .btn-shine::after { content: ""; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent); transform: rotate(25deg); animation: shine 2.8s infinite; pointer-events: none; }
     @keyframes shine { 0% { left: -60%; } 35%, 100% { left: 140%; } }
     .btn-white { background: #fff; color: #0e1217; font-weight: 700; font-size: 14px; padding: 13px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 7px; width: 100%; box-shadow: 0 3px 10px rgba(0,0,0,0.12); }
     .btn-dark { background: var(--inner); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 14px; padding: 13px 15px; border-radius: 12px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; }
@@ -95,29 +97,30 @@
 
     /* Support Chat */
     .chat-box { max-height: 210px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; padding-right: 2px; }
-    .msg { max-width: 85%; padding: 9px 13px; border-radius: 13px; font-size: 13px; line-height: 1.4; animation: pageIn 0.2s ease; }
+    .msg { max-width: 85%; padding: 9px 13px; border-radius: 13px; font-size: 13px; line-height: 1.4; animation: pageIn 0.2s ease; word-break: break-word; }
     .msg.bot { background: var(--inner); align-self: flex-start; border-bottom-left-radius: 3px; }
     .msg.user { background: linear-gradient(135deg, #00e5ff, #0099ff); color: #051018; font-weight: 600; align-self: flex-end; border-bottom-right-radius: 3px; }
     .chip-btn { background: var(--inner); border: 1px solid var(--border); color: var(--muted); font-size: 11px; font-weight: 600; padding: 6px 10px; border-radius: 8px; }
 
     /* Bottom Nav */
-    .navbar { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--nav); backdrop-filter: blur(16px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 100; padding-bottom: env(safe-area-inset-bottom, 0); }
+    .navbar { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: var(--nav); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 100; padding-bottom: env(safe-area-inset-bottom, 0); }
     .nav-btn { background: none; color: var(--muted); font-size: 11px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 3px; width: 25%; }
     .nav-btn.active { color: var(--cyan); }
     .nav-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); opacity: 0; transform: scale(0); transition: 0.25s var(--spring); }
     .nav-btn.active .nav-dot { opacity: 1; transform: scale(1); }
 
-    /* Modals */
-    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); z-index: 200; align-items: flex-end; }
+    /* Modals & Invoice Card */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 200; align-items: flex-end; }
     .modal.active { display: flex; }
-    .drawer { background: var(--card); border-top: 1px solid rgba(0,229,255,0.35); border-radius: 22px 22px 0 0; width: 100%; max-height: 85vh; overflow-y: auto; padding: 20px 18px 28px; animation: slideUp 0.28s var(--ease); }
+    .drawer { background: var(--card); border-top: 1px solid rgba(0,229,255,0.35); border-radius: 22px 22px 0 0; width: 100%; max-height: 85vh; overflow-y: auto; padding: 20px 18px 28px; animation: slideUp 0.26s var(--ease); }
     @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
     .t-row { background: var(--inner); border: 1px solid var(--border); border-radius: 13px; padding: 14px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; cursor: pointer; transition: 0.2s var(--spring); }
     .t-row:hover { border-color: var(--cyan); transform: translateY(-2px); }
     .t-row:active { transform: scale(0.97); }
     .tag { font-size: 10px; padding: 2px 6px; border-radius: 5px; font-weight: 800; margin-left: 6px; background: rgba(0,229,255,0.15); color: var(--cyan); }
-    .inp { width: 100%; background: var(--inner); border: 1px solid var(--border); border-radius: 11px; padding: 12px 14px; color: var(--text); font-size: 14px; outline: none; }
+    .inp { width: 100%; background: var(--inner); border: 1px solid var(--border); border-radius: 11px; padding: 12px 14px; color: var(--text); font-size: 14px; outline: none; user-select: text; }
     .inp:focus { border-color: var(--cyan); }
+    .invoice-box { background: var(--inner); border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 14px; }
     #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
   </style>
 </head>
@@ -148,7 +151,7 @@
       <div class="grid-2">
         <div class="card bal-card tilt" onclick="openModal('m-tariffs')" style="cursor:pointer;">
           <div><div class="greet">Баланс</div><div class="bal-val" id="ui-bal">0 ₽</div></div>
-          <span style="font-size:20px;">💳</span>
+          <span style="font-size:20px;">💰</span>
         </div>
         <div class="card bal-card tilt" onclick="openModal('m-ref')" style="cursor:pointer;">
           <div><div class="greet">Бонусы</div><div class="bal-val" style="color:var(--cyan);" id="ui-bon">0 ₽</div></div>
@@ -177,16 +180,16 @@
 
         <div class="alert-box" id="ui-alert">
           <span>⚠️</span>
-          <span>У вас пока нет активной подписки. Активируйте <b>3 дня теста за 1 ₽</b> для проверки скорости и доступа ко всем серверам!</span>
+          <span>У вас пока нет активной подписки. Пополните баланс от <b>1 ₽ (пробный тест на 3 дня)</b> для доступа к серверам!</span>
         </div>
 
-        <button class="btn-cyan btn-shine" id="ui-trial-btn" style="margin-bottom:11px;" onclick="activatePlan('Пробный период (3 дня)', 3)">
+        <button class="btn-cyan btn-shine" id="ui-trial-btn" style="margin-bottom:11px;" onclick="showInvoice('Пробный период (3 дня)', 1)">
           🎁 Попробовать 3 дня за 1 ₽
         </button>
 
         <div class="grid-2" style="margin-top:0;">
-          <button class="btn-white" onclick="openModal('m-tariffs')">💳 Тарифы</button>
-          <button class="btn-white" onclick="handleKeyAction()">🔑 Мой ключ</button>
+          <button class="btn-white" onclick="openModal('m-tariffs')">💳 Пополнить</button>
+          <button class="btn-white" onclick="handleKeyAction()">🔑 Новый ключ</button>
         </div>
 
         <button class="btn-dark row-between" style="margin-bottom:14px;" onclick="goTab('install')">
@@ -194,10 +197,14 @@
           <span id="ui-os-badge" style="color:var(--muted); font-size:13px;">💻 Windows ›</span>
         </button>
 
-        <div class="greet" style="margin-bottom:7px; font-weight:600;">Скачать приложение</div>
+        <div class="greet" style="margin-bottom:7px; font-weight:600;">Скачать приложение Happ</div>
         <div class="grid-2" style="margin-top:0;">
-          <button class="btn-dark" onclick="startOsSetup('Windows')">💻 Windows</button>
-          <button class="btn-dark" onclick="startOsSetup('Android')">🤖 Android</button>
+          <button class="btn-dark" onclick="downloadForOS('Windows')">💻 Windows</button>
+          <button class="btn-dark" onclick="downloadForOS('Android')">🤖 Android</button>
+        </div>
+        <div class="grid-2" style="margin-top:0;">
+          <button class="btn-dark" onclick="downloadForOS('iOS')">🍎 iPhone / iOS</button>
+          <button class="btn-dark" onclick="downloadForOS('macOS')">🍏 macOS</button>
         </div>
 
         <button class="btn-cyan" onclick="handleOneClickEnter()">➔ Войти в приложение в 1 клик</button>
@@ -210,7 +217,7 @@
         <div style="display:flex; align-items:center; gap:10px;">
           <span style="font-size:18px; color:var(--cyan);">⚡️</span>
           <div>
-            <div style="font-size:14px; font-weight:700;">Santy VLESS Reality</div>
+            <div style="font-size:14px; font-weight:700;">Santy VLESS Reality (Happ)</div>
             <div class="greet" id="wiz-key-status">Ультраскоростной протокол</div>
           </div>
         </div>
@@ -219,7 +226,7 @@
 
       <div id="w-step-1" style="text-align:center; padding:10px 0 20px;">
         <h2 style="font-size:24px; font-weight:900; margin-bottom:8px;" id="wiz-title">Настройка устройства</h2>
-        <p class="greet" style="max-width:270px; margin:0 auto;">Настройка VPN происходит в 3 шага и занимает пару минут</p>
+        <p class="greet" style="max-width:270px; margin:0 auto;">Настройка VPN через клиент Happ происходит в 3 шага и занимает пару минут</p>
         <div class="wiz-circle">🔌</div>
         <div style="display:flex; flex-direction:column; gap:10px;">
           <button class="btn-cyan" onclick="setWizStep(2)">Начать настройку на этом устройстве</button>
@@ -228,21 +235,21 @@
       </div>
 
       <div id="w-step-2" style="display:none; text-align:center; padding:10px 0 20px;">
-        <h2 style="font-size:24px; font-weight:900; margin-bottom:8px;">Шаг 2. Приложение</h2>
-        <p class="greet" style="max-width:280px; margin:0 auto;">Установите клиент <b id="wiz-app" style="color:var(--text);">Happ / Incy</b> и вернитесь к этому экрану</p>
+        <h2 style="font-size:24px; font-weight:900; margin-bottom:8px;">Шаг 2. Приложение Happ</h2>
+        <p class="greet" style="max-width:280px; margin:0 auto;">Скачайте официальный клиент <b id="wiz-app" style="color:var(--text);">Happ</b> и вернитесь к этому экрану</p>
         <div class="wiz-circle spin">📥</div>
         <div style="display:flex; flex-direction:column; gap:10px;">
-          <button class="btn-cyan" onclick="downloadClient()">📥 Скачать приложение</button>
+          <button class="btn-cyan" onclick="downloadClient()">📥 Скачать Happ</button>
           <button class="btn-dark" onclick="setWizStep(3)">Следующий шаг ➔</button>
         </div>
       </div>
 
       <div id="w-step-3" style="display:none; text-align:center; padding:10px 0 20px;">
         <h2 style="font-size:24px; font-weight:900; margin-bottom:8px;">Шаг 3. Вход в 1 клик</h2>
-        <p class="greet" style="max-width:280px; margin:0 auto;">Нажмите кнопку ниже — ваш персональный ключ добавится в приложение автоматически</p>
+        <p class="greet" style="max-width:280px; margin:0 auto;">Нажмите кнопку ниже — ваш ключ добавится в Happ автоматически</p>
         <div class="wiz-circle">🚀</div>
         <div style="display:flex; flex-direction:column; gap:10px;">
-          <button class="btn-cyan" onclick="triggerDeepLink()">➔ Импортировать профиль в 1 клик</button>
+          <button class="btn-cyan" onclick="triggerDeepLink()">➔ Импортировать профиль в Happ</button>
           <button class="btn-dark" onclick="copyVlessKey()">📋 Скопировать ключ вручную</button>
           <button class="btn-dark" onclick="setWizStep(4)">Я уже подключился ➔</button>
         </div>
@@ -250,7 +257,7 @@
 
       <div id="w-step-4" style="display:none; text-align:center; padding:10px 0 20px;">
         <h2 style="font-size:24px; font-weight:900; color:var(--green); margin-bottom:8px;">Готово! 🎉</h2>
-        <p class="greet" style="max-width:280px; margin:0 auto;">Профиль успешно активирован. Выберите страну в приложении и включите VPN!</p>
+        <p class="greet" style="max-width:280px; margin:0 auto;">Профиль добавлен в Happ. Выберите локацию и нажмите круглую кнопку включения!</p>
         <div class="wiz-circle" style="border-color:var(--green); box-shadow:0 0 25px rgba(46,204,113,0.3);">🛡</div>
         <button class="btn-cyan" onclick="goTab('home')">На главную</button>
       </div>
@@ -258,15 +265,15 @@
       <div id="w-step-0" style="display:none; padding:6px 0;">
         <button class="btn-dark" style="width:auto; padding:8px 14px; margin-bottom:12px;" onclick="setWizStep(1)">‹ Назад</button>
         <div style="display:flex; flex-direction:column; gap:9px;">
-          <div class="t-row" onclick="startOsSetup('iOS')"><b>🍎 iPhone / iPad (Incy)</b><span>›</span></div>
-          <div class="t-row" onclick="startOsSetup('Android')"><b>🤖 Android (Happ)</b><span>›</span></div>
-          <div class="t-row" onclick="startOsSetup('Windows')"><b>🖥 Windows (Happ)</b><span>›</span></div>
-          <div class="t-row" onclick="startOsSetup('macOS')"><b>💻 macOS (Happ)</b><span>›</span></div>
+          <div class="t-row" onclick="startOsSetup('iOS')"><b>🍎 iPhone / iPad (Happ App Store)</b><span>›</span></div>
+          <div class="t-row" onclick="startOsSetup('Android')"><b>🤖 Android (Happ Google Play)</b><span>›</span></div>
+          <div class="t-row" onclick="startOsSetup('Windows')"><b>🖥 Windows (Офф. сайт Happ)</b><span>›</span></div>
+          <div class="t-row" onclick="startOsSetup('macOS')"><b>💻 macOS (Happ App Store)</b><span>›</span></div>
         </div>
       </div>
     </div>
 
-    <!-- ВКЛАДКА 3: ПРОФИЛЬ -->
+    <!-- ВКЛАДКА 3: ПРОФИЛЬ (БЕЗ ПРИВЯЗКИ ПОЧТЫ) -->
     <div id="tab-profile" class="page">
       <div class="card tilt row-between" style="margin-top:10px;">
         <div>
@@ -287,7 +294,7 @@
           <span>›</span>
         </div>
         <div class="menu-item" onclick="openModal('m-tariffs')">
-          <div style="display:flex; align-items:center; gap:12px;"><div class="sq-icon">💳</div><div><b style="font-size:14px;">Тарифы и продление</b><div class="greet">От 1 ₽ за пробный период</div></div></div>
+          <div style="display:flex; align-items:center; gap:12px;"><div class="sq-icon">💳</div><div><b style="font-size:14px;">Пополнить баланс / Тарифы</b><div class="greet">От 1 ₽ за пробный период</div></div></div>
           <span>›</span>
         </div>
         <div class="menu-item" onclick="openModal('m-ref')">
@@ -300,13 +307,12 @@
         </div>
       </div>
 
-      <div class="sec-title">Резервная почта</div>
-      <div class="card row-between" style="padding:13px 15px;">
-        <div style="display:flex; align-items:center; gap:11px;">
-          <span style="font-size:20px;">✉️</span>
-          <div><b style="font-size:13.5px;" id="prof-email">Почта не привязана</b><div class="greet">Для сохранения доступа</div></div>
+      <div class="sec-title">Помощь</div>
+      <div class="card" style="padding:6px 16px;">
+        <div class="menu-item" onclick="openLink('https://t.me/santyvpn_manager')">
+          <div style="display:flex; align-items:center; gap:12px;"><div class="sq-icon">💬</div><div><b style="font-size:14px;">Связаться с поддержкой</b><div class="greet">Прямой диалог с менеджером</div></div></div>
+          <span>›</span>
         </div>
-        <button class="btn-dark" style="width:auto; padding:8px 14px; font-size:12px; color:var(--cyan); border-color:rgba(0,229,255,0.35);" onclick="openModal('m-email')">Привязать</button>
       </div>
     </div>
 
@@ -323,7 +329,7 @@
         <button class="btn-cyan" onclick="openLink('https://t.me/santyvpn_manager')">💬 Написать менеджеру в Telegram</button>
       </div>
 
-      <!-- Быстрый мини-чат -->
+      <!-- Быстрый мини-чат (защищен от XSS) -->
       <div class="card">
         <div style="font-size:13.5px; font-weight:800; margin-bottom:9px;">🤖 Быстрый онлайн-помощник</div>
         <div class="chat-box" id="chat-feed">
@@ -331,12 +337,12 @@
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
           <button class="chip-btn" onclick="askBot('Не работает YouTube / Instagram')">🔴 YouTube / Insta</button>
-          <button class="chip-btn" onclick="askBot('Как настроить на iPhone?')">🍏 На iPhone</button>
-          <button class="chip-btn" onclick="askBot('Как оплатить картой РФ?')">💳 Оплата РФ</button>
+          <button class="chip-btn" onclick="askBot('Как настроить Happ на iPhone?')">🍏 На iPhone</button>
+          <button class="chip-btn" onclick="askBot('Как пополнить баланс?')">💳 Пополнение</button>
           <button class="chip-btn" onclick="askBot('Как подключить 2-е устройство?')">📱 2-е устройство</button>
         </div>
         <div style="display:flex; gap:7px;">
-          <input id="chat-inp" class="inp" placeholder="Напишите ваш вопрос..." onkeydown="if(event.key==='Enter')sendChat()">
+          <input id="chat-inp" class="inp" maxlength="250" placeholder="Напишите ваш вопрос..." onkeydown="if(event.key==='Enter')sendChat()">
           <button class="btn-cyan" style="width:46px; flex-shrink:0;" onclick="sendChat()">➔</button>
         </div>
       </div>
@@ -348,36 +354,56 @@
 
   </div>
 
-  <!-- МОДАЛКИ -->
+  <!-- МОДАЛКА ВЫБОРА ТАРИФА -->
   <div id="m-tariffs" class="modal" onclick="if(event.target===this)closeModal('m-tariffs')">
     <div class="drawer">
       <div class="row-between" style="margin-bottom:16px;"><b style="font-size:18px;">Выбор тарифа SantyVPN</b><button class="icon-btn" onclick="closeModal('m-tariffs')">✕</button></div>
-      <div class="t-row" onclick="activatePlan('Пробный период (3 дня)', 3)">
+      <div class="t-row" onclick="showInvoice('Пробный период (3 дня)', 1)">
         <div><b>🎁 Пробный 3 дня <span class="tag">Тест</span></b><div class="greet">Полный доступ, до 10 устройств</div></div>
         <b style="font-size:18px; color:var(--cyan);">1 ₽</b>
       </div>
-      <div class="t-row" onclick="activatePlan('Стандарт (1 месяц)', 30)">
+      <div class="t-row" onclick="showInvoice('Стандарт (1 месяц)', 200)">
         <div><b>🌐 1 месяц</b><div class="greet">Безлимитный трафик, все локации</div></div>
         <b style="font-size:18px;">200 ₽</b>
       </div>
-      <div class="t-row" onclick="activatePlan('Оптимальный (3 месяца)', 90)">
+      <div class="t-row" onclick="showInvoice('Оптимальный (3 месяца)', 520)">
         <div><b>⚡️ 3 месяца <span class="tag">-15%</span></b><div class="greet">Выгода 80 ₽ • до 10 устройств</div></div>
         <b style="font-size:18px;">520 ₽</b>
       </div>
-      <div class="t-row" onclick="activatePlan('Максимум (12 месяцев)', 365)">
+      <div class="t-row" onclick="showInvoice('Максимум (12 месяцев)', 1760)">
         <div><b>🔥 12 месяцев <span class="tag" style="color:var(--green);">ХИТ</span></b><div class="greet">Всего 146 ₽ в месяц</div></div>
         <b style="font-size:18px; color:var(--green);">1 760 ₽</b>
       </div>
     </div>
   </div>
 
-  <div id="m-subs" class="modal" onclick="if(event.target===this)closeModal('m-subs')">
+  <!-- МОДАЛКА СЧЕТА НА ОПЛАТУ (1 В 1 КАК НА СКРИНШОТЕ) -->
+  <div id="m-pay" class="modal" onclick="if(event.target===this)closeModal('m-pay')">
     <div class="drawer">
-      <div class="row-between" style="margin-bottom:16px;"><b style="font-size:18px;">Мои подписки</b><button class="icon-btn" onclick="closeModal('m-subs')">✕</button></div>
-      <div class="card" id="m-sub-box"></div>
+      <div class="row-between" style="margin-bottom:14px;">
+        <b style="font-size:18px;" id="inv-plan-name">Оплата тарифа</b>
+        <button class="icon-btn" onclick="closeModal('m-pay')">✕</button>
+      </div>
+      <div class="invoice-box">
+        <div style="font-size:15px; margin-bottom:12px;">💰 <b>Баланс:</b> <span id="inv-balance">0</span></div>
+        <div style="font-size:17px; font-weight:800;">Необходимо оплатить: <span id="inv-amount" style="color:var(--cyan);">1760</span></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <button class="btn-green" onclick="proceedToPayment()">➕ Пополнить баланс</button>
+        <button class="btn-dark" onclick="closeModal('m-pay')">⬅ Меню</button>
+      </div>
     </div>
   </div>
 
+  <!-- МОИ ПОДПИСКИ -->
+  <div id="m-subs" class="modal" onclick="if(event.target===this)closeModal('m-subs')">
+    <div class="drawer">
+      <div class="row-between" style="margin-bottom:16px;"><b style="font-size:18px;">Мои подписки</b><button class="icon-btn" onclick="closeModal('m-subs')">✕</button></div>
+      <div class="card" id="m-sub-box" style="margin:0;"></div>
+    </div>
+  </div>
+
+  <!-- УСТРОЙСТВА -->
   <div id="m-devs" class="modal" onclick="if(event.target===this)closeModal('m-devs')">
     <div class="drawer">
       <div class="row-between" style="margin-bottom:16px;"><b style="font-size:18px;">Подключенные устройства</b><button class="icon-btn" onclick="closeModal('m-devs')">✕</button></div>
@@ -385,6 +411,7 @@
     </div>
   </div>
 
+  <!-- РЕФЕРАЛКА -->
   <div id="m-ref" class="modal" onclick="if(event.target===this)closeModal('m-ref')">
     <div class="drawer">
       <div class="row-between" style="margin-bottom:16px;"><b style="font-size:18px;">Реферальная программа</b><button class="icon-btn" onclick="closeModal('m-ref')">✕</button></div>
@@ -396,25 +423,18 @@
           <button class="btn-cyan" onclick="shareRef()">📢 Отправить</button>
         </div>
       </div>
-      <p class="greet" style="line-height:1.5;">Приглашайте друзей: вы получаете <b>+14 дней премиума</b> за каждого друга, а друг — бесплатный тест!</p>
+      <p class="greet" style="line-height:1.5;">Приглашайте друзей: вы получаете <b>+14 дней премиума</b> за каждого оплатившего друга!</p>
     </div>
   </div>
 
+  <!-- ПРОМОКОД -->
   <div id="m-promo" class="modal" onclick="if(event.target===this)closeModal('m-promo')">
     <div class="drawer">
       <div class="row-between" style="margin-bottom:16px;"><b style="font-size:18px;">Промокод</b><button class="icon-btn" onclick="closeModal('m-promo')">✕</button></div>
       <div style="display:flex; gap:8px;">
-        <input id="promo-inp" class="inp" placeholder="ВВЕДИТЕ ПРОМОКОД" style="text-transform:uppercase;">
+        <input id="promo-inp" class="inp" maxlength="32" placeholder="ВВЕДИТЕ ПРОМОКОД" style="text-transform:uppercase;">
         <button class="btn-cyan" style="width:90px;" onclick="applyPromo()">ОК</button>
       </div>
-    </div>
-  </div>
-
-  <div id="m-email" class="modal" onclick="if(event.target===this)closeModal('m-email')">
-    <div class="drawer">
-      <div class="row-between" style="margin-bottom:16px;"><b style="font-size:18px;">Привязка Email</b><button class="icon-btn" onclick="closeModal('m-email')">✕</button></div>
-      <input id="email-inp" type="email" class="inp" placeholder="name@example.com" style="margin-bottom:12px;">
-      <button class="btn-cyan" onclick="saveEmail()">Сохранить</button>
     </div>
   </div>
 
@@ -427,22 +447,34 @@
   </nav>
 
   <script>
-    // 1. Безопасное хранилище (не падает в закрытых WebView)
+    // ----------------- КОНФИГУРАЦИЯ ССЫЛОК И ОПЛАТЫ -----------------
+    // Сюда вставляется ссылка на вашу платежную страницу / кассу:
+    const PAYMENT_GATEWAY_URL = "https://your-payment-site.com/pay";
+
+    // Официальные ссылки на клиент Happ для всех платформ:
+    const HAPP_LINKS = {
+      Windows: "https://www.happ.su/main/ru",
+      iOS: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215",
+      Android: "https://play.google.com/store/apps/details?id=com.happproxy",
+      macOS: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
+    };
+
+    // 1. Безопасное хранилище
     const mem = {};
     const store = {
       get: (k, def = null) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch(e) { return mem[k] ?? def; } },
       set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) { mem[k] = v; } }
     };
 
-    // 2. Уведомления вместо заблокированного alert()
+    // 2. Уведомления (Toast)
     let toastTimer;
     function toast(msg, icon = '⚡️') {
       const el = document.getElementById('toast');
-      document.getElementById('toast-text').innerText = msg;
-      el.firstElementChild.innerText = icon;
+      document.getElementById('toast-text').textContent = msg;
+      el.firstElementChild.textContent = icon;
       el.classList.add('show');
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
       try { window.Telegram?.WebApp?.HapticFeedback?.notificationOccurred('success'); } catch(e) {}
     }
 
@@ -455,71 +487,81 @@
     store.set('santy_uid', uid);
     const uname = u?.username ? `@${u.username}` : (u?.first_name || '@Пользователь');
 
-    document.getElementById('ui-uname').innerText = uname;
-    document.getElementById('prof-uname').innerText = uname;
-    document.getElementById('prof-uid').innerText = `ID: ${uid}`;
-    document.getElementById('ref-url').innerText = `https://t.me/SantyVPN_bot?start=ref_${uid}`;
+    document.getElementById('ui-uname').textContent = uname;
+    document.getElementById('prof-uname').textContent = uname;
+    document.getElementById('prof-uid').textContent = `ID: ${uid}`;
+    document.getElementById('ref-url').textContent = `https://t.me/SantyVPN_bot?start=ref_${uid}`;
 
     const ua = navigator.userAgent || '';
     let curOS = /iPhone|iPad|iPod/i.test(ua) ? 'iOS' : (/Android/i.test(ua) ? 'Android' : (/Mac/i.test(ua) ? 'macOS' : 'Windows'));
     function updateOsUI(os) {
       curOS = os;
       const ic = (os === 'iOS' || os === 'macOS') ? '🍏' : (os === 'Android' ? '🤖' : '💻');
-      document.getElementById('ui-os-badge').innerText = `${ic} ${os} ›`;
-      document.getElementById('wiz-title').innerText = `Настройка на ${os}`;
-      document.getElementById('wiz-app').innerText = os === 'iOS' ? 'Incy (App Store)' : 'Happ';
+      document.getElementById('ui-os-badge').textContent = `${ic} ${os} ›`;
+      document.getElementById('wiz-title').textContent = `Настройка на ${os}`;
+      document.getElementById('wiz-app').textContent = os === 'Windows' ? 'Happ (Офф. сайт)' : `Happ (${os === 'Android' ? 'Google Play' : 'App Store'})`;
     }
     updateOsUI(curOS);
 
-    // 4. Состояние подписки (по умолчанию — НЕТ ПОДПИСКИ!)
+    // 4. Состояние баланса и подписки (по умолчанию — 0 ₽, подписка НЕ активна)
+    let userBalance = Number(store.get('santy_bal', 0)) || 0;
     let sub = store.get('santy_sub', { active: false });
     let devs = store.get('santy_devs', []);
+    let pendingAmount = 1760;
+
+    // Сброс старой фейковой подписки, если не было реальной оплаты
+    if (sub && sub.active && !sub.paid) {
+      sub = { active: false };
+      devs = [];
+      store.set('santy_sub', sub);
+      store.set('santy_devs', devs);
+    }
 
     function renderSub() {
-      const isOn = sub && sub.active && sub.exp > Date.now();
+      const isOn = Boolean(sub && sub.active && sub.paid && sub.exp > Date.now());
       const chip = document.getElementById('ui-chip');
       const card = document.getElementById('ui-sub-card');
       const mBox = document.getElementById('m-sub-box');
+      document.getElementById('ui-bal').textContent = `${userBalance} ₽`;
 
       if (isOn) {
         const dStr = new Date(sub.exp).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
         chip.className = 'chip on';
-        document.getElementById('ui-status').innerText = 'Активен';
+        document.getElementById('ui-status').textContent = 'Активен';
         card.className = 'card tilt sub-card on';
-        document.getElementById('ui-sub-title').innerText = `Активна до ${dStr}`;
-        document.getElementById('ui-key-num').innerText = `Ключ #${sub.key}`;
+        document.getElementById('ui-sub-title').textContent = `Активна до ${dStr}`;
+        document.getElementById('ui-key-num').textContent = `Ключ #${sub.key}`;
         const onEl = document.getElementById('ui-online');
-        onEl.style.color = 'var(--cyan)'; onEl.innerText = 'online • ∞';
+        onEl.style.color = 'var(--cyan)'; onEl.textContent = 'online • ∞';
         document.getElementById('ui-alert').style.display = 'none';
         document.getElementById('ui-trial-btn').style.display = 'none';
-        document.getElementById('ui-dev-pill').innerText = `${devs.length} из 10 устройств 📱`;
-        document.getElementById('prof-sub-txt').innerText = `${sub.plan} • Активна`;
-        document.getElementById('prof-sub-cnt').innerText = '1';
+        document.getElementById('ui-dev-pill').textContent = `${devs.length} из 10 устройств 📱`;
+        document.getElementById('prof-sub-txt').textContent = `${sub.plan} • Активна`;
+        document.getElementById('prof-sub-cnt').textContent = '1';
 
         mBox.innerHTML = `
           <div class="row-between" style="margin-bottom:8px;"><b>${sub.plan}</b><span class="chip on" style="padding:3px 9px;">Активна</span></div>
           <div class="greet" style="margin-bottom:14px;">Ключ #${sub.key} • Действует до ${dStr}</div>
           <button class="btn-cyan" style="margin-bottom:8px;" onclick="closeModal('m-subs');goTab('install')">⚙️ Подключить устройство</button>
-          <button class="btn-dark" style="color:var(--danger);" onclick="cancelSub()">Отключить подписку (Сброс)</button>
         `;
       } else {
         chip.className = 'chip off';
-        document.getElementById('ui-status').innerText = 'Не активен';
+        document.getElementById('ui-status').textContent = 'Не активен';
         card.className = 'card tilt sub-card off';
-        document.getElementById('ui-sub-title').innerText = 'Подписка не оформлена';
-        document.getElementById('ui-key-num').innerText = 'Ключ не создан';
+        document.getElementById('ui-sub-title').textContent = 'Подписка не оформлена';
+        document.getElementById('ui-key-num').textContent = 'Ключ не создан';
         const onEl = document.getElementById('ui-online');
-        onEl.style.color = 'var(--amber)'; onEl.innerText = 'offline • Нет доступа';
+        onEl.style.color = 'var(--amber)'; onEl.textContent = 'offline • Нет доступа';
         document.getElementById('ui-alert').style.display = 'flex';
         document.getElementById('ui-trial-btn').style.display = 'flex';
-        document.getElementById('ui-dev-pill').innerText = '0 из 10 устройств 📱';
-        document.getElementById('prof-sub-txt').innerText = 'Нет активных подписок';
-        document.getElementById('prof-sub-cnt').innerText = '0';
+        document.getElementById('ui-dev-pill').textContent = '0 из 10 устройств 📱';
+        document.getElementById('prof-sub-txt').textContent = 'Нет активных подписок';
+        document.getElementById('prof-sub-cnt').textContent = '0';
 
         mBox.innerHTML = `
           <div style="text-align:center; padding:12px 0;">
             <div style="font-size:16px; font-weight:800; margin-bottom:6px;">У вас нет активной подписки</div>
-            <div class="greet" style="margin-bottom:14px;">Попробуйте 3 дня за 1 ₽ или выберите тариф</div>
+            <div class="greet" style="margin-bottom:14px;">Пополните баланс от 1 ₽ для активации доступа</div>
             <button class="btn-cyan" onclick="closeModal('m-subs');openModal('m-tariffs')">💳 Выбрать тариф</button>
           </div>
         `;
@@ -527,23 +569,25 @@
       renderDevs();
     }
 
-    function activatePlan(plan, days) {
-      sub = { active: true, plan, exp: Date.now() + days * 86400000, key: Math.floor(100000 + Math.random() * 900000) };
-      if (devs.length === 0) devs = [{ name: `${curOS} (Текущее)`, time: 'Онлайн сейчас' }];
-      store.set('santy_sub', sub);
-      store.set('santy_devs', devs);
-      renderSub();
+    // 5. Выставление счета на пополнение (1-в-1 как на скриншоте)
+    function showInvoice(planTitle, price) {
       closeModal('m-tariffs');
-      fireConfetti();
-      toast(`Тариф «${plan}» успешно активирован!`, '🎉');
+      const needToPay = Math.max(0, price - userBalance);
+      pendingAmount = needToPay;
+      document.getElementById('inv-plan-name').textContent = planTitle;
+      document.getElementById('inv-balance').textContent = `${userBalance}`;
+      document.getElementById('inv-amount').textContent = `${needToPay}`;
+      openModal('m-pay');
     }
 
-    function cancelSub() {
-      sub = { active: false }; devs = [];
-      store.set('santy_sub', sub); store.set('santy_devs', devs);
-      renderSub();
-      closeModal('m-subs');
-      toast('Подписка отключена', '🗑');
+    function proceedToPayment() {
+      const targetUrl = `${PAYMENT_GATEWAY_URL}?amount=${pendingAmount}&uid=${uid}`;
+      toast(`Переход к оплате (${pendingAmount} ₽)...`, '💳');
+      if (PAYMENT_GATEWAY_URL.includes('your-payment-site.com')) {
+        toast(`Счет на ${pendingAmount} ₽ сформирован! Подключите ссылку кассы в PAYMENT_GATEWAY_URL`, '💳');
+      } else {
+        openLink(targetUrl);
+      }
     }
 
     function renderDevs() {
@@ -567,10 +611,22 @@
       toast('Устройство удалено', '🗑');
     }
 
-    // 5. Действия кнопок
+    // 6. Действия кнопок и скачивание Happ
+    function downloadForOS(os) {
+      updateOsUI(os);
+      const url = HAPP_LINKS[os] || HAPP_LINKS.Windows;
+      toast(`Переход к скачиванию Happ для ${os}...`, '📥');
+      openLink(url);
+    }
+
+    function downloadClient() {
+      downloadForOS(curOS);
+      setTimeout(() => setWizStep(3), 600);
+    }
+
     function handleKeyAction() {
-      if (!sub || !sub.active) {
-        toast('Сначала активируйте пробный период или тариф!', '⚠️');
+      if (!sub || !sub.active || !sub.paid) {
+        toast('Для получения ключа сначала пополните баланс!', '⚠️');
         openModal('m-tariffs');
         return;
       }
@@ -581,14 +637,18 @@
     }
 
     function copyVlessKey() {
-      const k = `vless://santy-${uid}-${sub?.key || 1}@node1.santyvpn.net:443?security=reality&sni=apple.com#SantyVPN`;
+      if (!sub || !sub.active || !sub.paid) {
+        toast('Ключ будет доступен после оплаты тарифа!', '⚠️');
+        openModal('m-tariffs');
+        return;
+      }
+      const k = `vless://santy-${uid}-${sub.key}@node1.santyvpn.net:443?security=reality&sni=apple.com#SantyVPN`;
       copyText(k, 'Ключ VLESS скопирован в буфер!');
     }
 
     function handleOneClickEnter() {
-      if (!sub || !sub.active) {
-        toast('Активируйте тест на 3 дня за 1 ₽ для входа!', '🎁');
-        openModal('m-tariffs');
+      if (!sub || !sub.active || !sub.paid) {
+        showInvoice('Пробный период (3 дня)', 1);
         return;
       }
       goTab('install');
@@ -598,7 +658,7 @@
     function startOsSetup(os) {
       updateOsUI(os);
       goTab('install');
-      setWizStep(1);
+      setWizStep(2);
     }
 
     function setWizStep(s) {
@@ -606,25 +666,19 @@
       if (s === 4) fireConfetti();
     }
 
-    function downloadClient() {
-      const urls = { iOS: 'https://apps.apple.com', Android: 'https://play.google.com', Windows: 'https://github.com', macOS: 'https://apps.apple.com' };
-      toast(`Скачивание для ${curOS}...`, '📥');
-      openLink(urls[curOS]);
-      setTimeout(() => setWizStep(3), 700);
-    }
-
     function triggerDeepLink() {
-      if (!sub || !sub.active) { openModal('m-tariffs'); return; }
-      toast('Открываем приложение...', '🚀');
+      if (!sub || !sub.active || !sub.paid) {
+        showInvoice('Пробный период (3 дня)', 1);
+        return;
+      }
+      toast('Открываем Happ...', '🚀');
       window.location.href = `happ://add/vless://santy-${uid}@node1.santyvpn.net:443?security=reality#SantyVPN`;
-      setTimeout(() => setWizStep(4), 900);
+      setTimeout(() => setWizStep(4), 800);
     }
 
-    // 6. Навигация и модалки
+    // 7. Навигация и модалки
     const tabs = ['home', 'install', 'profile', 'support'];
-    let curTab = 'home';
     function goTab(t) {
-      curTab = t;
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(`tab-${t}`).classList.add('active');
       document.querySelectorAll('.nav-btn').forEach((b, i) => b.classList.toggle('active', tabs[i] === t));
@@ -634,7 +688,7 @@
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-    // 7. Утилиты (Копирование, Ссылки, Темы)
+    // 8. Утилиты
     function copyText(txt, msg) {
       if (navigator.clipboard?.writeText) {
         navigator.clipboard.writeText(String(txt)).then(() => toast(msg, '📋')).catch(() => fallbackCopy(txt, msg));
@@ -649,54 +703,44 @@
     function openLink(url) {
       if (url.includes('t.me') && tg?.openTelegramLink) tg.openTelegramLink(url);
       else if (tg?.openLink) tg.openLink(url);
-      else window.open(url, '_blank');
+      else window.open(url, '_blank', 'noopener,noreferrer');
     }
 
     function shareRef() {
-      const u = document.getElementById('ref-url').innerText;
-      openLink(`https://t.me/share/url?url=${encodeURIComponent(u)}&text=${encodeURIComponent('Попробуй скоростной SantyVPN (YouTube 4K и Instagram без ограничений)!')}`);
+      const u = document.getElementById('ref-url').textContent;
+      openLink(`https://t.me/share/url?url=${encodeURIComponent(u)}&text=${encodeURIComponent('Скоростной SantyVPN (YouTube 4K и Instagram без тормозов):')}`);
     }
 
     function applyPromo() {
-      const v = document.getElementById('promo-inp').value.trim();
+      const v = document.getElementById('promo-inp').value.trim().toUpperCase();
       if (!v) return toast('Введите промокод', '⚠️');
-      closeModal('m-promo');
-      activatePlan(`Промокод ${v.toUpperCase()} (7 дней)`, 7);
-    }
-
-    function saveEmail() {
-      const v = document.getElementById('email-inp').value.trim();
-      if (!v.includes('@')) return toast('Введите корректный Email', '⚠️');
-      document.getElementById('prof-email').innerText = v;
-      closeModal('m-email');
-      toast('Почта успешно привязана!', '✉️');
+      toast('Промокод не найден или истек', '❌');
     }
 
     function toggleTheme() {
       const isL = document.body.classList.toggle('light');
-      document.getElementById('theme-icon').innerText = isL ? '🌙' : '☀️';
+      document.getElementById('theme-icon').textContent = isL ? '🌙' : '☀️';
     }
 
-    // 8. Поддержка и FAQ (Компактная генерация)
+    // 9. Поддержка и FAQ (все ссылки на Happ)
     const faqData = {
       '📶 Подключение': [
-        ['Как подключиться в первый раз?', 'Перейдите во вкладку «Установка», скачайте приложение Incy (для iOS) или Happ (для Android / Windows / Mac) и нажмите «Войти в 1 клик».'],
-        ['Почему тормозит YouTube или не грузит Instagram?', 'Включите режим TUN / VPN внутри приложения и смените локацию на Нидерланды или Финляндию — видео в 4K заработает без задержек.'],
-        ['Что делать при бесконечной загрузке?', 'Отключите сторонние VPN и нажмите кнопку «Мой ключ» на главной странице для обновления конфигурации.'],
-        ['Работает ли на Smart TV и роутерах?', 'Да! На Android TV доступно приложение Happ TV, а для роутеров Keenetic/OpenWRT выдаем конфиг через поддержку.']
+        ['Как подключиться в первый раз?', 'Скачайте официальное приложение Happ (для iPhone, Android, Windows или Mac), пополните баланс от 1 ₽ и нажмите «Войти в приложение в 1 клик».'],
+        ['Почему тормозит YouTube или не грузит Instagram?', 'Включите режим TUN / VPN внутри приложения Happ и выберите локацию Нидерланды или Финляндия — видео в 4K заработает без задержек.'],
+        ['Где скачать Happ на Windows и iPhone?', 'Нажмите кнопку «💻 Windows» на главной — откроется официальный сайт happ.su. На iPhone кнопка «🍎 iPhone / iOS» сразу перекинет на Happ в App Store.'],
+        ['Работает ли на Smart TV и роутерах?', 'Да! На Android TV и Apple TV доступно приложение Happ TV из магазина приложений.']
       ],
       '💳 Оплата': [
-        ['Как работает тест на 3 дня за 1 ₽?', 'Вы получаете 3 дня полного доступа без лимитов скорости. Отключить продление можно в любой момент в разделе «Мои подписки».'],
-        ['Какие способы оплаты доступны?', 'Принимаются любые карты РФ (МИР, Visa, Mastercard), СБП в 1 клик, Telegram Stars и криптовалюта (USDT / TON).'],
-        ['Как отменить автопродление?', 'Откройте «Профиль» ➔ «Мои подписки» и нажмите кнопку «Отключить подписку».']
+        ['Как пополнить баланс и оплатить тариф?', 'Выберите нужный тариф (от 1 ₽ за 3 дня теста) и нажмите «➕ Пополнить баланс» для перехода на страницу оплаты.'],
+        ['Какие способы оплаты доступны?', 'Карты РФ (МИР, Visa, Mastercard), СБП в 1 клик, Telegram Stars и криптовалюта (USDT / TON).']
       ],
       '📱 Устройства': [
-        ['Сколько устройств можно подключить?', 'На одну подписку можно подключить до 10 любых устройств одновременно (смартфон, ПК, ноутбук, планшет).'],
+        ['Сколько устройств можно подключить?', 'На одну подписку можно подключить до 10 любых устройств одновременно через приложение Happ.'],
         ['Как удалить старое устройство?', 'В разделе «Профиль» ➔ «Мои устройства» нажмите на иконку корзины 🗑 напротив ненужного гаджета.']
       ],
       '🛡 Безопасность': [
-        ['Почему SantyVPN не блокируется?', 'Мы используем протокол VLESS Reality + Vision, который маскирует трафик под обычные HTTPS-запросы к сайтам Apple и Microsoft.'],
-        ['Храните ли вы логи?', 'Нет, действует строгая политика No-Logs. Все серверы работают в RAM-режиме без записи вашей активности.']
+        ['Почему SantyVPN не блокируется?', 'Мы используем протокол VLESS Reality + Vision в клиенте Happ, который маскирует трафик под обычные HTTPS-запросы.'],
+        ['Храните ли вы логи?', 'Нет, действует строгая политика No-Logs. Все серверы работают в RAM-режиме без записи трафика.']
       ]
     };
 
@@ -713,62 +757,91 @@
     }
     renderFaq('📶 Подключение');
 
+    // Защищенный от спама и XSS чат
+    let lastChatTime = 0;
     function askBot(q) { document.getElementById('chat-inp').value = q; sendChat(); }
     function sendChat() {
+      const now = Date.now();
+      if (now - lastChatTime < 500) return;
       const inp = document.getElementById('chat-inp');
       const txt = inp.value.trim();
       if (!txt) return;
+      lastChatTime = now;
+
       const feed = document.getElementById('chat-feed');
-      feed.innerHTML += `<div class="msg user">${txt}</div>`;
+      const uMsg = document.createElement('div');
+      uMsg.className = 'msg user';
+      uMsg.textContent = txt;
+      feed.appendChild(uMsg);
       inp.value = '';
       feed.scrollTop = feed.scrollHeight;
 
       const low = txt.toLowerCase();
-      let ans = 'Передал ваш вопрос оператору! Для мгновенного ответа живого специалиста нажмите кнопку «Написать менеджеру» выше.';
-      if (low.includes('youtube') || low.includes('insta')) ans = 'Для работы YouTube 4K и Instagram включите режим TUN в приложении Happ/Incy и выберите сервер Нидерланды.';
-      else if (low.includes('iphone') || low.includes('ios')) ans = 'На iPhone скачайте приложение Incy в App Store, затем нажмите «Войти в 1 клик» на главной.';
-      else if (low.includes('оплат') || low.includes('рф')) ans = 'Оплата работает с любых карт МИР/РФ и через СБП. Зачисление занимает 5–10 секунд.';
-      else if (low.includes('устройств') || low.includes('2-е')) ans = 'Вы можете подключить до 10 устройств по одному ключу! Просто откройте бота на втором устройстве.';
+      let ans = 'Передал ваш вопрос оператору! Для мгновенного ответа нажмите кнопку «Написать менеджеру» выше.';
+      if (low.includes('youtube') || low.includes('insta')) ans = 'Для работы YouTube 4K и Instagram включите режим TUN в приложении Happ и выберите сервер Нидерланды.';
+      else if (low.includes('iphone') || low.includes('ios')) ans = 'На iPhone нажмите кнопку «🍎 iPhone / iOS» на главной — откроется приложение Happ в App Store.';
+      else if (low.includes('пополн') || low.includes('оплат')) ans = 'Выберите тариф и нажмите «➕ Пополнить баланс» — откроется страница быстрой оплаты.';
+      else if (low.includes('устройств') || low.includes('2-е')) ans = 'Вы можете подключить до 10 устройств в Happ по одному ключу!';
 
       setTimeout(() => {
-        feed.innerHTML += `<div class="msg bot">${ans}</div>`;
+        const bMsg = document.createElement('div');
+        bMsg.className = 'msg bot';
+        bMsg.textContent = ans;
+        feed.appendChild(bMsg);
         feed.scrollTop = feed.scrollHeight;
-      }, 450);
+      }, 380);
     }
 
-    // 9. Безопасный 3D-наклон (не блокирует клики по кнопкам!)
+    // 10. Оптимизированный 3D-наклон через requestAnimationFrame (без фризов)
     document.querySelectorAll('.tilt').forEach(c => {
+      let ticking = false;
       c.addEventListener('mousemove', e => {
         if (e.target.closest('button')) { c.style.transform = ''; return; }
-        const r = c.getBoundingClientRect();
-        const rx = ((e.clientY - r.top - r.height/2) / r.height) * -8;
-        const ry = ((e.clientX - r.left - r.width/2) / r.width) * 8;
-        c.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-      });
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const r = c.getBoundingClientRect();
+            const rx = ((e.clientY - r.top - r.height/2) / r.height) * -7;
+            const ry = ((e.clientX - r.left - r.width/2) / r.width) * 7;
+            c.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
       c.addEventListener('mouseleave', () => c.style.transform = '');
     });
 
-    // 10. Конфетти
+    // 11. Конфетти с защитой от наложения анимаций
+    let confettiLock = false;
     function fireConfetti() {
+      if (confettiLock) return;
+      confettiLock = true;
       const cv = document.getElementById('confetti'), ctx = cv.getContext('2d');
       cv.width = innerWidth; cv.height = innerHeight;
-      const pts = Array.from({length: 65}, () => ({
+      const pts = Array.from({length: 55}, () => ({
         x: cv.width/2, y: cv.height/2, r: Math.random()*5+3,
         c: ['#00e5ff','#2ecc71','#ff4757','#ffa502','#fff'][Math.floor(Math.random()*5)],
-        vx: (Math.random()-0.5)*15, vy: (Math.random()-0.7)*16, a: 1
+        vx: (Math.random()-0.5)*14, vy: (Math.random()-0.7)*15, a: 1
       }));
       (function draw() {
         ctx.clearRect(0,0,cv.width,cv.height);
         let ok = false;
         pts.forEach(p => {
-          p.x += p.vx; p.y += p.vy; p.vy += 0.3; p.a -= 0.018;
+          p.x += p.vx; p.y += p.vy; p.vy += 0.32; p.a -= 0.02;
           if (p.a > 0) { ok = true; ctx.globalAlpha = p.a; ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fill(); }
         });
-        if (ok) requestAnimationFrame(draw); else ctx.clearRect(0,0,cv.width,cv.height);
+        if (ok) requestAnimationFrame(draw);
+        else { ctx.clearRect(0,0,cv.width,cv.height); confettiLock = false; }
       })();
     }
 
+    // Проверка URL-параметра ?pay=1 (если открыто из кнопки бота «+ Пополнить баланс»)
+    const urlParams = new URLSearchParams(window.location.search);
     renderSub();
+    if (urlParams.get('pay') === '1') {
+      const amt = Number(urlParams.get('amount')) || 200;
+      showInvoice('Пополнение баланса', amt);
+    }
   </script>
 </body>
 </html>
