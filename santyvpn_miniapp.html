@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>SantyVPN — Личный кабинет</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --card-border: #30363d;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+      --accent: #2ea043;
+      --accent-cyan: #38bdf8;
+      --danger: #f85149;
+      --nav-bg: #161b22;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding-bottom: 85px;
+      overflow-x: hidden;
+    }
+    .header {
+      padding: 16px 20px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 18px;
+    }
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(46, 160, 67, 0.15);
+      border: 1px solid rgba(46, 160, 67, 0.4);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #3fb950;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: #3fb950;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #3fb950;
+    }
+    .container {
+      padding: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .balance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .balance-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .balance-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .balance-val {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .sub-card {
+      background: linear-gradient(145deg, #161b22, #1c232d);
+      border: 1px solid #38bdf840;
+    }
+    .sub-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .sub-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .sub-date {
+      font-size: 13px;
+      color: var(--accent-cyan);
+      margin-top: 3px;
+    }
+    .sub-chips {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .chip {
+      background: rgba(255,255,255,0.06);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      color: #fff;
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      margin-top: 8px;
+    }
+    .step-box {
+      text-align: center;
+      padding: 24px 16px;
+    }
+    .step-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 2px solid var(--accent-cyan);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 26px;
+    }
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      cursor: pointer;
+    }
+    .list-item:last-child {
+      border-bottom: none;
+    }
+    .list-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .device-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .trash-btn {
+      background: transparent;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      font-size: 16px;
+      padding: 6px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--card-border);
+      padding: 12px 0;
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .faq-a {
+      display: none;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    .faq-item.open .faq-a {
+      display: block;
+    }
+    .navbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 65px;
+      background: var(--nav-bg);
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 100;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    .nav-btn {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      font-size: 11px;
+      cursor: pointer;
+      width: 25%;
+    }
+    .nav-btn.active {
+      color: var(--accent-cyan);
+    }
+    .nav-icon {
+      font-size: 20px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      align-items: flex-end;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-sheet {
+      background: #161b22;
+      border-top: 1px solid var(--card-border);
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .tariff-card {
+      border: 1px solid var(--card-border);
+      padding: 14px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    .tariff-badge {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-cyan);
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="brand-group">
+      <div class="brand-logo">S</div>
+      <div>
+        <div class="brand-title">SantyVPN</div>
+        <div style="font-size: 11px; color: var(--text-muted);">High-Speed Network</div>
+      </div>
+    </div>
+    <div class="status-badge">
+      <div class="status-dot"></div>
+      Активен
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- TAB 1: Главная -->
+    <div id="tab-home" class="tab-content active">
+      <div class="balance-grid">
+        <div class="balance-card">
+          <div>
+            <div class="balance-label">Баланс</div>
+            <div class="balance-val">0 ₽</div>
+          </div>
+          <span>💳</span>
+        </div>
+        <div class="balance-card">
+          <div>
+            <div class="balance-label">Бонусы</div>
+            <div class="balance-val" style="color: var(--accent-cyan);">0 ₽</div>
+          </div>
+          <span>⭐</span>
+        </div>
+      </div>
+
+      <div class="card sub-card">
+        <div class="sub-header">
+          <div>
+            <div class="sub-title">Подписка VLESS Ultra</div>
+            <div class="sub-date">Активна до 26 октября 2026 г.</div>
+          </div>
+          <span style="font-size: 24px;">🛡</span>
+        </div>
+        <div class="sub-chips">
+          <div class="chip">online • ∞</div>
+          <div class="chip">10 устройств 📱</div>
+          <div class="chip">🇩🇪 🇳🇱 🇺🇸 🇫🇮</div>
+        </div>
+        <button class="btn btn-primary" onclick="switchTab('install')">
+          🚀 Подключить VPN в 1 клик
+        </button>
+        <button class="btn btn-secondary" onclick="openModal('tariffsModal')">
+          💳 Продлить или сменить тариф
+        </button>
+      </div>
+
+      <div class="card">
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">Выбор устройства</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <button class="btn btn-secondary" onclick="openWizard('iOS')">🍏 iOS (Incy)</button>
+          <button class="btn btn-secondary" onclick="openWizard('Android')">🤖 Android (Happ)</button>
+          <button class="btn btn-secondary" onclick="openWizard('Windows')">💻 Windows</button>
+          <button class="btn btn-secondary" onclick="openWizard('macOS')">🍏 macOS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Подключение -->
+    <div id="tab-install" class="tab-content">
+      <div class="card step-box" id="step1">
+        <div class="step-icon">📲</div>
+        <div class="step-title">Шаг 1: Установите приложение</div>
+        <div class="step-desc">
+          Установите официальный клиент <b id="app-name">Incy</b> для вашей системы.
+        </div>
+        <button class="btn btn-primary" onclick="nextStep(2)">📥 Скачать приложение</button>
+        <button class="btn btn-secondary" onclick="nextStep(2)">Уже установлено ➔</button>
+      </div>
+
+      <div class="card step-box" id="step2" style="display: none;">
+        <div class="step-icon">⚡️</div>
+        <div class="step-title">Шаг 2: Вход без логина и пароля</div>
+        <div class="step-desc">
+          Нажмите кнопку ниже. Приложение откроется автоматически и добавит ваши ключи в 1 клик.
+        </div>
+        <button class="btn btn-primary" onclick="nextStep(3)">🚀 Подключить профиль в 1 клик</button>
+        <button class="btn btn-secondary" onclick="alert('Ключ скопирован!')">📋 Скопировать вручную</button>
+      </div>
+
+      <div class="card step-box" id="step3" style="display: none;">
+        <div class="step-icon" style="border-color: #3fb950; color: #3fb950;">🎉</div>
+        <div class="step-title">Готово! Все настроено</div>
+        <div class="step-desc">
+          Ваш профиль SantyVPN успешно добавлен. Выберите любую страну и пользуйтесь свободным интернетом.
+        </div>
+        <button class="btn btn-primary" onclick="switchTab('home')">Завершить настройку</button>
+      </div>
+    </div>
+
+    <!-- TAB 3: Профиль -->
+    <div id="tab-profile" class="tab-content">
+      <div class="card">
+        <div style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Активные устройства (2 из 10)</div>
+        <div class="device-row">
+          <div>
+            <div style="font-size: 13px; font-weight: 600;">iPhone 15 Pro Max</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Активен 2 часа назад</div>
+          </div>
+          <button class="trash-btn" onclick="this.parentElement.remove()">🗑</button>
+        </div>
+        <div class="device-row">
+          <div>
+            <div style="font-size: 13px; font-weight: 600;">MacBook Pro M3</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Онлайн сейчас</div>
+          </div>
+          <button class="trash-btn" onclick="this.parentElement.remove()">🗑</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="list-item" onclick="openModal('tariffsModal')">
+          <div class="list-left"><span>💳</span><div>Управление тарифом</div></div>
+          <span>›</span>
+        </div>
+        <div class="list-item" onclick="alert('Реферальная ссылка скопирована!')">
+          <div class="list-left"><span>👥</span><div>Реферальная программа</div></div>
+          <span>›</span>
+        </div>
+        <div class="list-item" onclick="prompt('Введите промокод:')">
+          <div class="list-left"><span>🎁</span><div>Активировать промокод</div></div>
+          <span>›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Поддержка -->
+    <div id="tab-support" class="tab-content">
+      <div class="card">
+        <div style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">Служба заботы SantyVPN</div>
+        <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+          Отвечаем на любые вопросы за 2 минуты в режиме реального времени.
+        </div>
+        <a href="https://t.me/santyvpn_support" target="_blank" class="btn btn-primary">
+          💬 Написать менеджеру в Telegram
+        </a>
+      </div>
+
+      <div class="card">
+        <div style="font-size: 15px; font-weight: 700; margin-bottom: 12px;">Частые вопросы</div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q"><span>Как подключить второй телефон?</span><span>▼</span></div>
+          <div class="faq-a">Откройте вкладку «Установка» на новом устройстве или перешлите персональную ссылку подписки.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+          <div class="faq-q"><span>Что делать, если скорость упала?</span><span>▼</span></div>
+          <div class="faq-a">В приложении доступно более 10 локаций. Переключитесь на сервер с наименьшим пингом (Германия или Финляндия).</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Модалка Тарифов -->
+  <div id="tariffsModal" class="modal" onclick="if(event.target===this)closeModal('tariffsModal')">
+    <div class="modal-sheet">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 style="font-size:18px;">Выбор тарифа SantyVPN</h3>
+        <span onclick="closeModal('tariffsModal')" style="cursor:pointer; font-size:20px;">✕</span>
+      </div>
+
+      <div class="tariff-card" onclick="alert('Выбран тест за 1 ₽')">
+        <div>
+          <div style="font-weight:700;">🎁 Пробный период (7 дней) <span class="tariff-badge">Тест</span></div>
+          <div style="font-size:12px; color:var(--text-muted);">Безлимит, все серверы</div>
+        </div>
+        <div style="font-size:18px; font-weight:800; color:var(--accent-cyan);">1 ₽</div>
+      </div>
+
+      <div class="tariff-card" onclick="alert('Выбран 1 месяц')">
+        <div>
+          <div style="font-weight:700;">🌐 Стандарт (1 месяц)</div>
+          <div style="font-size:12px; color:var(--text-muted);">10 устройств, до 1 Гбит/с</div>
+        </div>
+        <div style="font-size:18px; font-weight:800;">200 ₽</div>
+      </div>
+
+      <div class="tariff-card" onclick="alert('Выбрано 3 месяца')">
+        <div>
+          <div style="font-weight:700;">⚡️ Оптимальный (3 месяца) <span class="tariff-badge">-15%</span></div>
+          <div style="font-size:12px; color:var(--text-muted);">Экономия 80 ₽</div>
+        </div>
+        <div style="font-size:18px; font-weight:800;">520 ₽</div>
+      </div>
+
+      <div class="tariff-card" onclick="alert('Выбрано 12 месяцев')">
+        <div>
+          <div style="font-weight:700;">🔥 Максимум (12 месяцев) <span class="tariff-badge">-35% Хит</span></div>
+          <div style="font-size:12px; color:var(--text-muted);">Всего 146 ₽ в месяц</div>
+        </div>
+        <div style="font-size:18px; font-weight:800; color:#3fb950;">1 760 ₽</div>
+      </div>
+
+      <button class="btn btn-secondary" onclick="closeModal('tariffsModal')" style="margin-top:12px;">Закрыть</button>
+    </div>
+  </div>
+
+  <nav class="navbar">
+    <button class="nav-btn active" onclick="switchTab('home')">
+      <span class="nav-icon">🛡</span>
+      <span>Главная</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('install')">
+      <span class="nav-icon">⚙️</span>
+      <span>Установка</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('profile')">
+      <span class="nav-icon">👤</span>
+      <span>Профиль</span>
+    </button>
+    <button class="nav-btn" onclick="switchTab('support')">
+      <span class="nav-icon">💬</span>
+      <span>Помощь</span>
+    </button>
+  </nav>
+
+  <script>
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.ready();
+      window.Telegram.WebApp.expand();
+    }
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById('tab-' + tabId);
+      if (target) target.classList.add('active');
+      const tabs = ['home', 'install', 'profile', 'support'];
+      const index = tabs.indexOf(tabId);
+      if (index !== -1) document.querySelectorAll('.nav-btn')[index].classList.add('active');
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    function openWizard(os) {
+      document.getElementById('app-name').innerText = os === 'iOS' ? 'Incy (App Store)' : 'Happ';
+      switchTab('install');
+      nextStep(1);
+    }
+    function nextStep(step) {
+      document.getElementById('step1').style.display = step === 1 ? 'block' : 'none';
+      document.getElementById('step2').style.display = step === 2 ? 'block' : 'none';
+      document.getElementById('step3').style.display = step === 3 ? 'block' : 'none';
+    }
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+  </script>
+</body>
+</html>
